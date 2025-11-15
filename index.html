@@ -36,7 +36,7 @@
     .btn-primary{background:var(--accent-grad);color:white;box-shadow:var(--shadow)}
     .btn-outline{border:1px solid rgba(15,23,42,0.06);color:var(--muted);background:transparent}
 
-    /* HERO - optimized, compact */
+    /* HERO - compact + fixed */
     .hero {
       display:flex;
       gap:28px;
@@ -53,19 +53,30 @@
       flex-shrink:0;
     }
 
+    /* HERO-LOGO: only image here (no repeated text) */
     .hero-logo {
       display:flex;
       align-items:center;
       gap:14px;
       margin-bottom:8px;
     }
-    .hero-logo img { height:84px; width:auto; display:block }
+    .hero-logo img { height:72px; width:auto; display:block }
+
     .eyebrow{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(38,67,182,0.06);color:var(--accent1);font-weight:700;font-size:13px;margin-bottom:10px;display:inline-block}
     h1{font-size:36px;margin:8px 0 12px;line-height:1.06}
     p.lead{color:var(--muted);max-width:62ch;font-size:15px;margin-bottom:16px}
 
-    .kpis{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
-    .kpi{background:var(--card);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);min-width:160px}
+    /* KEY FIX: KPI layout uses grid to prevent breaking */
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top:6px;
+      align-items:start;
+      width:100%;
+      max-width:900px;
+    }
+    .kpi{background:var(--card);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow)}
     .kpi .label{font-size:12px;color:var(--muted);margin-bottom:6px}
     .kpi .value{font-weight:700;color:var(--text)}
 
@@ -106,12 +117,14 @@
       .hero{flex-direction:column;gap:16px}
       .hero-right{width:100%}
       .logo-img{height:40px}
-      .hero-logo img{height:76px}
+      .hero-logo img{height:68px}
       .grid-3{grid-template-columns:1fr}
       .nav a{display:none}
       .kpi{min-width:140px}
       .chart{height:160px}
       .contact-left{max-width:100%}
+      /* On very small screens, let KPIs stack */
+      .kpis{grid-template-columns:1fr}
     }
 
     /* small helpers */
@@ -143,16 +156,13 @@
   </header>
 
   <main class="container">
-    <!-- COMPACT HERO -->
+    <!-- COMPACT HERO (fixed) -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-left">
-        <!-- hero logo + header compactly arranged -->
+        <!-- hero logo (image only, no repeated title) -->
         <div class="hero-logo" aria-hidden="true">
           <img src="logo.png" alt="Helix Analytics logo (large)" />
-          <div style="min-width:0">
-            <div style="font-weight:700;font-size:18px">Helix Analytics</div>
-            <div style="font-size:13px;color:var(--muted)">Data • Intelligence • Growth</div>
-          </div>
+          <!-- removed duplicate text 'Helix Analytics' from hero to avoid repetition -->
         </div>
 
         <div>
@@ -160,6 +170,7 @@
           <h1 id="hero-heading">Turning raw business data into clear, actionable insights</h1>
           <p class="lead muted">Helix Analytics helps enterprises structure, analyze, and visualize data — from cleaning and exploration to dashboards and forecasting. We focus on clarity and practical outcomes that support real decisions.</p>
 
+          <!-- KPI GRID: will not wrap into next line on desktop -->
           <div class="kpis" role="list">
             <div class="kpi" role="listitem"><div class="label">Approach</div><div class="value">Practical & business-focused</div></div>
             <div class="kpi" role="listitem"><div class="label">Delivery</div><div class="value">Readable dashboards & reports</div></div>
@@ -184,6 +195,7 @@
       </aside>
     </section>
 
+    <!-- rest of page unchanged... -->
     <!-- SERVICES -->
     <section id="services" aria-labelledby="services-title">
       <h2 id="services-title" class="section-title">Services</h2>
@@ -236,7 +248,7 @@
       </div>
     </section>
 
-    <!-- PROCESS -->
+    <!-- PROCESS, FOUNDER, CONTACT same as before -->
     <section id="process" aria-labelledby="process-title">
       <h2 id="process-title" class="section-title">How we work</h2>
       <p class="muted">A simple, transparent process so you always know what to expect.</p>
@@ -257,7 +269,6 @@
       </div>
     </section>
 
-    <!-- FOUNDER -->
     <section aria-labelledby="founder-title">
       <h2 id="founder-title" class="section-title">About the founder</h2>
       <div class="founder">
@@ -271,19 +282,16 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-title">
       <h2 id="contact-title" class="section-title">Contact</h2>
-
       <div class="contact-panel" role="region" aria-label="Contact information">
         <div class="contact-left">
           <div class="title">Ready to discuss your data?</div>
           <p class="muted">Send a short message or contact us directly. We will respond with practical next steps and an estimated timeline. No pricing listed — every project is scoped individually.</p>
         </div>
-
         <div class="contact-cta">
-          <a class="email" href="mailto:contact.helixanalytics@gmail.com" title="Email Helix Analytics" style="text-decoration:none;padding:10px 14px;border-radius:10px;color:#fff;display:inline-block;background:var(--accent-grad);font-weight:700">Email: contact.helixanalytics@gmail.com</a>
-          <a class="wa" href="https://wa.me/917841992721" title="WhatsApp Helix Analytics" style="text-decoration:none;padding:10px 14px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);color:var(--muted);display:inline-block;font-weight:700">WhatsApp: +91 78419 92721</a>
+          <a class="email" href="mailto:contact.helixanalytics@gmail.com" style="text-decoration:none;padding:10px 14px;border-radius:10px;color:#fff;display:inline-block;background:var(--accent-grad);font-weight:700">Email: contact.helixanalytics@gmail.com</a>
+          <a class="wa" href="https://wa.me/917841992721" style="text-decoration:none;padding:10px 14px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);color:var(--muted);display:inline-block;font-weight:700">WhatsApp: +91 78419 92721</a>
         </div>
       </div>
     </section>
