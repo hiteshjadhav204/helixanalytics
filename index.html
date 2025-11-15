@@ -6,6 +6,7 @@
   <title>Helix Analytics — Data • Clarity • Insight</title>
   <meta name="description" content="Helix Analytics - Data cleaning, EDA, SQL management, Power BI & Tableau dashboards, and forecasting." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg: #f6f8fb;
@@ -19,133 +20,238 @@
       --shadow: 0 10px 30px rgba(15,23,42,0.08);
       --max-width: 1150px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
-    .container{max-width:var(--max-width);margin:0 auto;padding:22px}
 
-    /* header */
-    header{position:sticky;top:10px;z-index:30;background:transparent;padding:8px 0}
-    .nav{display:flex;justify-content:space-between;align-items:center;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo-img{height:44px;display:block}
-    .brand .title{font-weight:800}
-    nav a{margin-left:16px;text-decoration:none;color:var(--muted);font-weight:600}
-    .nav-actions{display:flex;gap:10px;align-items:center}
-    .btn{padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
-    .btn-primary{background:var(--accent-grad);color:white;box-shadow:var(--shadow)}
-    .btn-outline{border:1px solid rgba(15,23,42,0.06);color:var(--muted);background:transparent}
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:Inter,system-ui;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
 
-    /* HERO - compact + fixed */
-    .hero {
+    .container{max-width:var(--max-width);margin:0 auto;padding:22px;}
+
+    /* HEADER */
+    header{
+      position:sticky;
+      top:10px;
+      z-index:30;
+      background:transparent;
+      padding:8px 0;
+    }
+    .nav{display:flex;justify-content:space-between;align-items:center;}
+    .brand{display:flex;align-items:center;gap:12px;}
+
+    /* ⭐ Navbar logo enlarged */
+    .logo-img{
+      height:56px;
+      width:auto;
+      display:block;
+    }
+
+    .brand .title{font-weight:800;font-size:18px;}
+    nav a{
+      margin-left:18px;
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:600;
+      font-size:15px;
+    }
+
+    .btn{
+      padding:10px 16px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+    }
+    .btn-primary{
+      background:var(--accent-grad);
+      color:white;
+      box-shadow:var(--shadow);
+    }
+    .btn-outline{
+      border:1px solid #d0d7e2;
+      color:var(--muted);
+    }
+
+    /* HERO (logo removed + spacing improved) */
+    .hero{
       display:flex;
-      gap:28px;
+      gap:32px;
       align-items:flex-start;
-      padding:18px 0 28px 0; /* tightened top padding */
-      column-gap:36px;
+      padding:26px 0 30px 0;
     }
-    .hero-left{
-      flex:1;
-      min-width:0;
+    .hero-left{flex:1;}
+    .hero-right{width:420px;flex-shrink:0;}
+
+    .eyebrow{
+      display:inline-block;
+      padding:6px 12px;
+      background:rgba(38,67,182,0.06);
+      color:var(--accent1);
+      font-weight:700;
+      font-size:13px;
+      border-radius:999px;
+      margin-bottom:12px;
     }
-    .hero-right{
-      width:420px;
-      flex-shrink:0;
+    h1{
+      font-size:38px;
+      line-height:1.1;
+      margin-bottom:12px;
+      font-weight:800;
+    }
+    p.lead{
+      color:var(--muted);
+      font-size:15px;
+      max-width:65ch;
+      margin-bottom:18px;
     }
 
-    /* HERO-LOGO: only image here (no repeated text) */
-    .hero-logo {
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin-bottom:8px;
-    }
-    .hero-logo img { height:72px; width:auto; display:block }
-
-    .eyebrow{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(38,67,182,0.06);color:var(--accent1);font-weight:700;font-size:13px;margin-bottom:10px;display:inline-block}
-    h1{font-size:36px;margin:8px 0 12px;line-height:1.06}
-    p.lead{color:var(--muted);max-width:62ch;font-size:15px;margin-bottom:16px}
-
-    /* KEY FIX: KPI layout uses grid to prevent breaking */
+    /* KPI FIXED → stays in one row on desktop */
     .kpis{
       display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap:12px;
-      margin-top:6px;
-      align-items:start;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
       width:100%;
       max-width:900px;
     }
-    .kpi{background:var(--card);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow)}
-    .kpi .label{font-size:12px;color:var(--muted);margin-bottom:6px}
-    .kpi .value{font-weight:700;color:var(--text)}
+    .kpi{
+      background:var(--card);
+      padding:14px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+    .kpi .label{font-size:12px;color:var(--muted);margin-bottom:6px;}
+    .kpi .value{font-size:15px;font-weight:700;}
 
-    .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
-    .chart{height:220px;border-radius:10px;background:linear-gradient(90deg,#eef2ff,#e0f7fb);display:grid;place-items:center;font-weight:700;color:#243240}
-
-    /* sections */
-    section{padding:40px 0}
-    h2.section-title{font-size:22px;margin:0 0 10px}
-    p.muted{color:var(--muted);margin:0 0 14px}
-
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow);min-height:110px}
-    .card h4{margin-bottom:8px}
-    .tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-    .chip{background:#eef2ff;padding:8px 12px;border-radius:999px;font-weight:700;color:#243240}
-
-    .steps{display:flex;gap:12px;flex-wrap:wrap}
-    .step{flex:1;background:var(--card);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
-
-    .founder{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    .founder .avatar{width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:white;font-weight:800;font-size:24px}
-    .founder p{color:var(--muted);margin-top:6px;max-width:700px}
-
-    .contact-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    .contact-left{max-width:68%}
-    .contact-left .title{font-weight:800;font-size:16px}
-    .contact-left p{color:var(--muted);margin-top:8px}
-    .contact-cta{display:flex;flex-direction:column;gap:8px}
-    .contact-cta a{display:inline-block;text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:700}
-    .contact-cta .email{background:var(--accent-grad);color:#fff}
-    .contact-cta .wa{border:1px solid rgba(15,23,42,0.06);color:var(--muted);background:transparent}
-
-    footer{padding:26px 0;text-align:center;color:var(--muted);font-size:14px}
-
-    /* responsive */
-    @media (max-width:980px){
-      .hero{flex-direction:column;gap:16px}
-      .hero-right{width:100%}
-      .logo-img{height:40px}
-      .hero-logo img{height:68px}
-      .grid-3{grid-template-columns:1fr}
-      .nav a{display:none}
-      .kpi{min-width:140px}
-      .chart{height:160px}
-      .contact-left{max-width:100%}
-      /* On very small screens, let KPIs stack */
-      .kpis{grid-template-columns:1fr}
+    /* Right panel */
+    .panel{
+      background:var(--card);
+      padding:16px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+    .chart{
+      height:220px;
+      border-radius:10px;
+      background:linear-gradient(90deg,#eef2ff,#e0f7fb);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-weight:700;
+      color:#2d3b55;
     }
 
-    /* small helpers */
-    .hidden-mobile{display:inline-block}
-    @media(max-width:480px){.hidden-mobile{display:none}}
+    /* Sections */
+    section{padding:40px 0;}
+    h2.section-title{font-size:22px;margin-bottom:10px;}
+    p.muted{color:var(--muted);margin-bottom:16px;}
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .card{
+      background:var(--card);
+      padding:16px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+
+    .tools{display:flex;gap:10px;flex-wrap:wrap;}
+    .chip{
+      padding:8px 12px;
+      background:#eef2ff;
+      border-radius:999px;
+      font-weight:700;
+      color:#273142;
+    }
+
+    .steps{display:flex;gap:16px;flex-wrap:wrap;}
+    .step{
+      flex:1;
+      background:var(--card);
+      padding:16px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+
+    .founder{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+
+    .avatar{
+      width:80px;height:80px;
+      border-radius:12px;
+      background:var(--accent-grad);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      font-size:26px;
+      font-weight:800;
+    }
+
+    /* Contact */
+    .contact-panel{
+      background:var(--card);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:16px;
+    }
+    .contact-cta{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .contact-cta a{
+      text-decoration:none;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+    }
+    .email{background:var(--accent-grad);color:white;}
+    .wa{border:1px solid #d0d7e2;color:var(--muted);}
+
+    footer{
+      text-align:center;
+      padding:28px 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* Responsive */
+    @media(max-width:980px){
+      .hero{flex-direction:column;}
+      .hero-right{width:100%;}
+      .grid-3{grid-template-columns:1fr;}
+      .kpis{grid-template-columns:1fr;}
+      .nav a{display:none;}
+      .chart{height:160px;}
+    }
   </style>
 </head>
+
 <body>
+
+  <!-- HEADER -->
   <header>
     <div class="container nav">
       <div class="brand">
-        <!-- small navbar logo -->
-        <img src="logo.png" alt="Helix Analytics logo" class="logo-img" />
+        <img src="logo.png" class="logo-img" alt="Helix Analytics Logo">
         <div>
           <div class="title">Helix Analytics</div>
           <div style="font-size:13px;color:var(--muted)">Data • Clarity • Insight</div>
         </div>
       </div>
 
-      <div class="nav-actions">
-        <nav aria-label="Main navigation">
+      <div class="nav-right">
+        <nav>
           <a href="#services">Services</a>
           <a href="#process">Process</a>
           <a href="#contact">Contact</a>
@@ -155,158 +261,164 @@
     </div>
   </header>
 
+  <!-- HERO -->
   <main class="container">
-    <!-- COMPACT HERO (fixed) -->
-    <section class="hero" aria-labelledby="hero-heading">
+    <section class="hero">
       <div class="hero-left">
-        <!-- hero logo (image only, no repeated title) -->
-        <div class="hero-logo" aria-hidden="true">
-          <img src="logo.png" alt="Helix Analytics logo (large)" />
-          <!-- removed duplicate text 'Helix Analytics' from hero to avoid repetition -->
+
+        <!-- REMOVED HERO LOGO AS REQUESTED -->
+
+        <div class="eyebrow">Analytics & BI Consultancy</div>
+
+        <h1>Turning raw business data into clear, actionable insights</h1>
+
+        <p class="lead">
+          Helix Analytics helps enterprises structure, analyze, and visualize data —
+          from cleaning and exploration to dashboards and forecasting.
+        </p>
+
+        <div class="kpis">
+          <div class="kpi">
+            <div class="label">Approach</div>
+            <div class="value">Practical & business-focused</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Delivery</div>
+            <div class="value">Readable dashboards & reports</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Support</div>
+            <div class="value">Transparent communication</div>
+          </div>
         </div>
 
-        <div>
-          <div class="eyebrow">Analytics & BI Consultancy</div>
-          <h1 id="hero-heading">Turning raw business data into clear, actionable insights</h1>
-          <p class="lead muted">Helix Analytics helps enterprises structure, analyze, and visualize data — from cleaning and exploration to dashboards and forecasting. We focus on clarity and practical outcomes that support real decisions.</p>
-
-          <!-- KPI GRID: will not wrap into next line on desktop -->
-          <div class="kpis" role="list">
-            <div class="kpi" role="listitem"><div class="label">Approach</div><div class="value">Practical & business-focused</div></div>
-            <div class="kpi" role="listitem"><div class="label">Delivery</div><div class="value">Readable dashboards & reports</div></div>
-            <div class="kpi" role="listitem"><div class="label">Support</div><div class="value">Transparent communication</div></div>
-          </div>
-
-          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn btn-primary" href="#contact">Get in touch</a>
-            <a class="btn btn-outline" href="#services">See services</a>
-          </div>
+        <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn-primary" href="#contact">Get in touch</a>
+          <a class="btn btn-outline" href="#services">See services</a>
         </div>
+
       </div>
 
-      <aside class="hero-right">
-        <div class="panel" aria-hidden="true">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <div style="font-weight:700">Dashboard Preview</div>
-            <div style="font-size:13px;color:var(--muted)">Clean • Visual • Insightful</div>
+      <div class="hero-right">
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;margin-bottom:12px;font-weight:700;">
+            Dashboard Preview
+            <span style="font-size:13px;color:var(--muted);font-weight:500;">Clean • Visual • Insightful</span>
           </div>
           <div class="chart">[Dashboard screenshot placeholder]</div>
         </div>
-      </aside>
+      </div>
     </section>
 
-    <!-- rest of page unchanged... -->
     <!-- SERVICES -->
-    <section id="services" aria-labelledby="services-title">
-      <h2 id="services-title" class="section-title">Services</h2>
-      <p class="muted">A complete analytics workflow tailored to your business needs. No generic dashboards — everything is scoped to your KPIs and outcomes.</p>
+    <section id="services">
+      <h2 class="section-title">Services</h2>
+      <p class="muted">A complete analytics workflow tailored to your business needs.</p>
 
-      <div class="grid-3" role="list">
-        <div class="card" role="listitem">
+      <div class="grid-3">
+        <div class="card">
           <h4>Data Cleaning & Preparation</h4>
-          <p class="muted">Missing values, duplicates, formatting, and feature engineering — repeatable pipelines built with Python & Power Query.</p>
+          <p class="muted">Feature engineering, missing value handling, and structured datasets using Python & Power Query.</p>
         </div>
-
-        <div class="card" role="listitem">
-          <h4>Exploratory Data Analysis (EDA)</h4>
-          <p class="muted">Statistical exploration to reveal trends, drivers, and opportunities using Python (Pandas, NumPy, Matplotlib).</p>
+        <div class="card">
+          <h4>Exploratory Data Analysis</h4>
+          <p class="muted">Deep exploration of trends, anomalies and business patterns using Python.</p>
         </div>
-
-        <div class="card" role="listitem">
+        <div class="card">
           <h4>SQL Database Management</h4>
-          <p class="muted">MS-SQL design, advanced queries, and integrations so your data is reliable and accessible for reporting.</p>
+          <p class="muted">Database querying, optimization, and integration with BI tools.</p>
         </div>
       </div>
 
-      <div style="height:14px"></div>
+      <div style="height:16px;"></div>
 
-      <div class="grid-3" role="list">
-        <div class="card" role="listitem">
+      <div class="grid-3">
+        <div class="card">
           <h4>Dashboard Design (Power BI / Tableau)</h4>
-          <p class="muted">Interactive, stakeholder-focused dashboards: clear KPIs, drill-throughs, and visual storytelling.</p>
+          <p class="muted">Interactive dashboards built for decision-makers and teams.</p>
         </div>
-
-        <div class="card" role="listitem">
-          <h4>Excel-Based Reporting</h4>
-          <p class="muted">Automated Excel dashboards using pivot tables, formulas, and connections to your data sources.</p>
+        <div class="card">
+          <h4>Excel-based Reporting</h4>
+          <p class="muted">Dynamic reports using pivots, formulas, automation, and SQL connections.</p>
         </div>
-
-        <div class="card" role="listitem">
+        <div class="card">
           <h4>Modeling & Forecasting</h4>
-          <p class="muted">Practical forecasting and predictive models to guide planning and reduce uncertainty.</p>
+          <p class="muted">Forecasting and predictive analytics for better planning.</p>
         </div>
       </div>
 
-      <div class="tools" aria-hidden="true">
+      <div class="tools">
         <div class="chip">Python</div>
         <div class="chip">Pandas</div>
         <div class="chip">Power BI</div>
+        <div class="chip">SQL</div>
         <div class="chip">Tableau</div>
-        <div class="chip">MS SQL</div>
-        <div class="chip">Excel (Advanced)</div>
+        <div class="chip">Excel</div>
         <div class="chip">DAX</div>
       </div>
     </section>
 
-    <!-- PROCESS, FOUNDER, CONTACT same as before -->
-    <section id="process" aria-labelledby="process-title">
-      <h2 id="process-title" class="section-title">How we work</h2>
-      <p class="muted">A simple, transparent process so you always know what to expect.</p>
+    <!-- PROCESS -->
+    <section id="process">
+      <h2 class="section-title">How we work</h2>
+      <p class="muted">A clear, structured approach to solving business problems.</p>
 
-      <div class="steps" role="list">
-        <div class="step" role="listitem">
+      <div class="steps">
+        <div class="step">
           <strong>1. Understand</strong>
-          <p class="muted">We clarify goals, KPIs and available data sources.</p>
+          <p class="muted">We clarify goals, KPIs, and available data sources.</p>
         </div>
-        <div class="step" role="listitem">
+        <div class="step">
           <strong>2. Prepare</strong>
           <p class="muted">Clean and structure data for reliable analysis.</p>
         </div>
-        <div class="step" role="listitem">
+        <div class="step">
           <strong>3. Deliver</strong>
-          <p class="muted">Dashboards, reports and models with actionable recommendations.</p>
+          <p class="muted">Dashboards, reports, and models with clear recommendations.</p>
         </div>
       </div>
     </section>
 
-    <section aria-labelledby="founder-title">
-      <h2 id="founder-title" class="section-title">About the founder</h2>
+    <!-- FOUNDER -->
+    <section>
+      <h2 class="section-title">About the founder</h2>
       <div class="founder">
-        <div class="avatar founder-avatar" aria-hidden="true">
-          <div class="avatar-inner" style="width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:24px">HJ</div>
-        </div>
+        <div class="avatar">HJ</div>
         <div>
-          <div style="font-weight:700">Hitesh Jadhav — Founder</div>
-          <p class="muted">Certified Data Analyst with an engineering background and experience in market analysis. Hitesh combines statistical rigor, practical business sense and modern tools to deliver insights that help teams make better decisions.</p>
+          <strong>Hitesh Jadhav — Founder</strong>
+          <p class="muted">
+            Certified Data Analyst with engineering background and deep experience in data,
+            dashboards, SQL, and business intelligence.
+          </p>
         </div>
       </div>
     </section>
 
-    <section id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title" class="section-title">Contact</h2>
-      <div class="contact-panel" role="region" aria-label="Contact information">
-        <div class="contact-left">
-          <div class="title">Ready to discuss your data?</div>
-          <p class="muted">Send a short message or contact us directly. We will respond with practical next steps and an estimated timeline. No pricing listed — every project is scoped individually.</p>
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+
+      <div class="contact-panel">
+        <div>
+          <div style="font-weight:800;font-size:16px;">Ready to discuss your data?</div>
+          <p class="muted">Send a message or reach out directly. We respond with steps, timelines, and clarity.</p>
         </div>
+
         <div class="contact-cta">
-          <a class="email" href="mailto:contact.helixanalytics@gmail.com" style="text-decoration:none;padding:10px 14px;border-radius:10px;color:#fff;display:inline-block;background:var(--accent-grad);font-weight:700">Email: contact.helixanalytics@gmail.com</a>
-          <a class="wa" href="https://wa.me/917841992721" style="text-decoration:none;padding:10px 14px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);color:var(--muted);display:inline-block;font-weight:700">WhatsApp: +91 78419 92721</a>
+          <a href="mailto:contact.helixanalytics@gmail.com" class="email">Email: contact.helixanalytics@gmail.com</a>
+          <a href="https://wa.me/917841992721" class="wa">WhatsApp: +91 78419 92721</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      <div style="font-weight:800">Helix Analytics</div>
-      <div style="color:var(--muted);margin-top:6px">© <span id="year"></span> Helix Analytics — Data • Clarity • Insight</div>
-    </div>
+    © <span id="year"></span> Helix Analytics — Data • Clarity • Insight
   </footer>
 
   <script>
-    // set current year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
