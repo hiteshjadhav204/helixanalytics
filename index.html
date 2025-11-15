@@ -37,8 +37,18 @@
 
     .container{max-width:var(--max-width);margin:0 auto;padding:22px}
 
-    /* HEADER */
-    header{position:sticky;top:8px;z-index:40;background:transparent;padding:8px 0}
+    /* HEADER — now fixed */
+    header{
+      position:fixed;       /* changed from sticky */
+      top:0;
+      left:0;
+      right:0;
+      z-index:9999;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(6px);
+      padding:10px 0;       /* slightly larger padding to match bigger logo */
+      box-shadow: 0 6px 18px rgba(2,6,23,0.04);
+    }
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo-img{height:128px;width:auto;display:block}
@@ -315,7 +325,7 @@
   <footer>© <span id="year"></span> Helix Analytics — Data • Intelligence • Growth</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
-  <!-- CAROUSEL JS -->
+  <!-- CAROUSEL JS (unchanged) -->
   <script>
   (function(){
     const viewport = document.querySelector('.carousel__viewport');
@@ -412,6 +422,26 @@
       }, 120);
     });
   })();
+  </script>
+
+  <!-- NEW: set top padding on main so content doesn't hide under fixed header -->
+  <script>
+    (function(){
+      function adjustMainPaddingForHeader(){
+        const header = document.querySelector('header');
+        const main = document.querySelector('main');
+        if(!header || !main) return;
+        const h = Math.ceil(header.getBoundingClientRect().height);
+        main.style.paddingTop = h + 'px';
+      }
+      window.addEventListener('load', adjustMainPaddingForHeader);
+      window.addEventListener('resize', () => {
+        clearTimeout(window.__headerPadTimer);
+        window.__headerPadTimer = setTimeout(adjustMainPaddingForHeader, 80);
+      });
+      // also adjust shortly after DOM changes (in case logo or fonts change size)
+      setTimeout(adjustMainPaddingForHeader, 600);
+    })();
   </script>
 </body>
 </html>
