@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Helix Analytics — Data • Intelligence • Growth</title>
+  <title>Helix Analytics — Data • Clarity • Insight</title>
   <meta name="description" content="Helix Analytics - Data cleaning, EDA, SQL management, Power BI & Tableau dashboards, and forecasting." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
@@ -23,8 +23,20 @@
 
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
-    .container{max-width:var(--max-width);margin:0 auto;padding:22px}
+    body{
+      margin:0;
+      font-family:Inter,system-ui;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+    }
+
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:22px;
+    }
 
     /* HEADER */
     header{
@@ -36,45 +48,103 @@
     }
     .nav{
       display:flex;
-      align-items:center;       /* ensures vertical alignment */
+      align-items:center;
       justify-content:space-between;
       gap:16px;
     }
 
-    .brand{display:flex;align-items:center;gap:12px}
-    /* BLUE MARK: bigger navbar logo */
-    .logo-img{height:72px;width:auto;display:block}
-    .brand .title{font-weight:800;font-size:18px}
-    .brand .subtitle{font-size:13px;color:var(--muted)}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
 
-    /* NAV RIGHT: keep items on one line and centered */
-    .nav-right{display:flex;align-items:center;gap:22px}
-    nav.main-nav{display:flex;gap:22px;align-items:center}
-    nav.main-nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:15px}
+    .logo-img{
+      height:72px;
+      width:auto;
+      display:block;
+    }
 
-    .btn{padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
-    .btn-primary{background:var(--accent-grad);color:white;box-shadow:var(--shadow)}
-    .btn-outline{border:1px solid #d0d7e2;color:var(--muted);background:transparent}
+    .brand .title{
+      font-weight:800;
+      font-size:18px;
+    }
+    .brand .subtitle{
+      font-size:13px;
+      color:var(--muted);
+    }
 
-    /* HERO (compact + no CTA buttons) */
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:22px;
+    }
+
+    nav.main-nav{
+      display:flex;
+      gap:22px;
+      align-items:center;
+    }
+
+    nav.main-nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      font-size:15px;
+    }
+
+    .btn{
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .btn-primary{
+      background:var(--accent-grad);
+      color:white;
+      box-shadow:var(--shadow);
+    }
+
+    /* HERO */
     .hero{
       display:flex;
       gap:32px;
       align-items:flex-start;
-      padding:18px 0 14px 0; /* reduced bottom padding to pull services up */
+      padding:18px 0 14px 0;
     }
     .hero-left{flex:1;min-width:0}
     .hero-right{width:420px;flex-shrink:0}
 
     .eyebrow{
-      display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(38,67,182,0.06);color:var(--accent1);font-weight:700;font-size:13px;margin-bottom:12px;
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(38,67,182,0.06);
+      color:var(--accent1);
+      font-weight:700;
+      font-size:13px;
+      margin-bottom:12px;
     }
-    h1{
-      font-size:36px;line-height:1.06;margin:6px 0 12px;font-weight:800;
-    }
-    p.lead{color:var(--muted);font-size:15px;max-width:65ch;margin-bottom:14px}
 
-    /* KPI GRID (fixed row) */
+    h1{
+      font-size:36px;
+      line-height:1.06;
+      margin:6px 0 12px;
+      font-weight:800;
+    }
+
+    p.lead{
+      color:var(--muted);
+      font-size:15px;
+      max-width:65ch;
+      margin-bottom:14px;
+    }
+
+    /* KPI GRID */
     .kpis{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -83,67 +153,191 @@
       max-width:900px;
       margin-top:6px;
     }
-    .kpi{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}
-    .kpi .label{font-size:12px;color:var(--muted);margin-bottom:6px}
-    .kpi .value{font-size:15px;font-weight:700}
 
-    .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
-    .chart{height:220px;border-radius:10px;background:linear-gradient(90deg,#eef2ff,#e0f7fb);display:flex;align-items:center;justify-content:center;font-weight:700;color:#243240}
+    .kpi{
+      background:var(--card);
+      padding:14px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+    .kpi .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .kpi .value{
+      font-size:15px;
+      font-weight:700;
+    }
 
-    /* Sections */
-    section{padding:28px 0} /* reduced to pull Services up under hero */
-    h2.section-title{font-size:22px;margin-bottom:10px}
-    p.muted{color:var(--muted);margin-bottom:12px}
+    /* PANEL */
+    .panel{
+      background:var(--card);
+      padding:16px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
 
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}
+    /* CAROUSEL */
+    .carousel{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .carousel__viewport{
+      overflow:hidden;
+      width:100%;
+    }
+    .carousel__track{
+      display:flex;
+      gap:12px;
+      list-style:none;
+      padding:0;
+      margin:0;
+      transition:transform 300ms ease;
+    }
+    .carousel__slide{
+      min-width:560px;
+      max-width:560px;
+      flex-shrink:0;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 8px 24px rgba(15,23,42,0.06);
+      background:#f6f8fb;
+    }
+    .carousel__slide img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      display:block;
+    }
 
-    .tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .chip{padding:8px 12px;background:#eef2ff;border-radius:999px;font-weight:700;color:#243240}
+    @media (max-width:900px){
+      .carousel__slide{min-width:420px;max-width:420px}
+      .carousel__slide img{height:180px}
+    }
+    @media (max-width:480px){
+      .carousel__slide{min-width:320px;max-width:320px}
+      .carousel__slide img{height:150px}
+    }
 
-    .steps{display:flex;gap:12px;flex-wrap:wrap}
-    .step{flex:1;background:var(--card);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
+    .carousel__nav{
+      background:rgba(255,255,255,0.95);
+      border:1px solid rgba(15,23,42,0.06);
+      width:40px;
+      height:40px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      font-size:20px;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(2,6,23,0.06);
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:10;
+    }
+    .carousel__nav--prev{left:-6px}
+    .carousel__nav--next{right:-6px}
 
-    .founder{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-    .avatar{width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-size:26px;font-weight:800}
+    .carousel__dots{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      margin-top:6px;
+    }
+    .carousel__dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#d9e6ff;
+      cursor:pointer;
+      border:none;
+    }
+    .carousel__dot[aria-selected="true"]{
+      background:linear-gradient(90deg,#2643b6,#1b9ad6);
+      transform:scale(1.2);
+    }
 
-    /* Contact */
-    .contact-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    .contact-cta{display:flex;flex-direction:column;gap:10px}
-    .contact-cta a{text-decoration:none;padding:10px 14px;border-radius:10px;font-weight:700}
-    .email{background:var(--accent-grad);color:white}
-    .wa{border:1px solid #d0d7e2;color:var(--muted)}
+    /* SECTIONS */
+    section{padding:28px 0}
 
-    footer{text-align:center;padding:26px 0;color:var(--muted);font-size:14px}
+    h2.section-title{
+      font-size:22px;
+      margin-bottom:10px;
+    }
 
-    /* Responsive */
+    p.muted{
+      color:var(--muted);
+      margin-bottom:12px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .card{
+      background:var(--card);
+      padding:14px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+
+    .tools{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .chip{
+      padding:8px 12px;
+      background:#eef2ff;
+      border-radius:999px;
+      font-weight:700;
+      color:#243240;
+    }
+
+    /* FOOTER */
+    footer{
+      text-align:center;
+      padding:26px 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* RESPONSIVE */
     @media (max-width:980px){
-      .hero{flex-direction:column;gap:18px}
-      .hero-right{width:100%}
-      .grid-3{grid-template-columns:1fr}
-      .kpis{grid-template-columns:1fr}
+      .hero{
+        flex-direction:column;
+        gap:18px;
+      }
+      .hero-right{
+        width:100%;
+      }
       nav.main-nav{display:none}
       .logo-img{height:64px}
-      .chart{height:160px}
-      section{padding:20px 0}
+      .grid-3{grid-template-columns:1fr}
+      .kpis{grid-template-columns:1fr}
     }
   </style>
 </head>
+
 <body>
 
   <!-- HEADER -->
   <header>
     <div class="container nav">
       <div class="brand">
-        <!-- BLUE-MARK: bigger navbar logo -->
         <img src="logo.png" class="logo-img" alt="Helix Analytics logo">
         <div>
           <div class="title">Helix Analytics</div>
-          <div class="subtitle">Data • Intelligence • Growth</div>
+          <div class="subtitle">Data • Clarity • Insight</div>
         </div>
       </div>
 
-      <!-- RED-MARK: nav items + Email button aligned in one line -->
       <div class="nav-right">
         <nav class="main-nav" aria-label="Main navigation">
           <a href="#services">Services</a>
@@ -157,46 +351,72 @@
 
   <!-- HERO -->
   <main class="container">
-    <section class="hero" aria-labelledby="hero-heading">
+    <section class="hero">
       <div class="hero-left">
-        <!-- NO hero logo here (you asked to remove it) -->
         <div class="eyebrow">Analytics & BI Consultancy</div>
 
-        <h1 id="hero-heading">Turning raw business data into clear, actionable insights</h1>
+        <h1>Turning raw business data into clear, actionable insights</h1>
 
-        <p class="lead muted">Helix Analytics helps enterprises structure, analyze, and visualize data — from cleaning and exploration to dashboards and forecasting.</p>
+        <p class="lead muted">
+          Helix Analytics helps enterprises structure, analyze, and visualize data — 
+          from cleaning and exploration to dashboards and forecasting.
+        </p>
 
-        <!-- KPI grid (3-in-row) -->
-        <div class="kpis" role="list">
-          <div class="kpi" role="listitem">
+        <div class="kpis">
+          <div class="kpi">
             <div class="label">Approach</div>
             <div class="value">Practical & business-focused</div>
           </div>
-          <div class="kpi" role="listitem">
+          <div class="kpi">
             <div class="label">Delivery</div>
             <div class="value">Readable dashboards & reports</div>
           </div>
-          <div class="kpi" role="listitem">
+          <div class="kpi">
             <div class="label">Support</div>
             <div class="value">Transparent communication</div>
           </div>
         </div>
-
-        <!-- YELLOW MARK: removed the Get in touch / See services CTAs per request -->
       </div>
 
       <div class="hero-right">
         <div class="panel">
+
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:700;">
             <div>Dashboard Preview</div>
-            <div style="font-size:13px;color:var(--muted);font-weight:500;">Clean • Visual • Insightful</div>
+            <div style="font-size:13px;color:var(--muted);font-weight:500;">Swipe • Click • Auto-Slide</div>
           </div>
-          <div class="chart">[Dashboard screenshot placeholder]</div>
+
+          <!-- CAROUSEL -->
+          <div class="carousel">
+
+            <button class="carousel__nav carousel__nav--prev" aria-label="Previous slide">‹</button>
+
+            <div class="carousel__viewport" tabindex="0">
+              <ul class="carousel__track">
+
+                <li class="carousel__slide"><img src="Dash1.png" alt="Dashboard 1"></li>
+                <li class="carousel__slide"><img src="Dash2.png" alt="Dashboard 2"></li>
+                <li class="carousel__slide"><img src="Dash3.png" alt="Dashboard 3"></li>
+                <li class="carousel__slide"><img src="Dash4.png" alt="Dashboard 4"></li>
+                <li class="carousel__slide"><img src="Dash5.png" alt="Dashboard 5"></li>
+                <li class="carousel__slide"><img src="Dash6.png" alt="Dashboard 6"></li>
+                <li class="carousel__slide"><img src="Dash7.png" alt="Dashboard 7"></li>
+                <li class="carousel__slide"><img src="Dash8.png" alt="Dashboard 8"></li>
+
+              </ul>
+            </div>
+
+            <button class="carousel__nav carousel__nav--next" aria-label="Next slide">›</button>
+
+            <div class="carousel__dots" role="tablist" aria-label="Slide navigation"></div>
+
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- SERVICES (moved up by lowered hero spacing) -->
+    <!-- SERVICES -->
     <section id="services">
       <h2 class="section-title">Services</h2>
       <p class="muted">A complete analytics workflow tailored to your business needs.</p>
@@ -204,7 +424,7 @@
       <div class="grid-3">
         <div class="card">
           <h4>Data Cleaning & Preparation</h4>
-          <p class="muted">Feature engineering, missing value handling, and structured datasets using Python & Power Query.</p>
+          <p class="muted">Feature engineering, missing value handling, structured datasets using Python & Power Query.</p>
         </div>
         <div class="card">
           <h4>Exploratory Data Analysis</h4>
@@ -212,7 +432,7 @@
         </div>
         <div class="card">
           <h4>SQL Database Management</h4>
-          <p class="muted">MS-SQL design, advanced queries, and integrations for reliable reporting.</p>
+          <p class="muted">MS-SQL queries, optimization & integration with BI tools.</p>
         </div>
       </div>
 
@@ -221,25 +441,25 @@
       <div class="grid-3">
         <div class="card">
           <h4>Dashboard Design (Power BI / Tableau)</h4>
-          <p class="muted">Interactive, stakeholder-focused dashboards: clear KPIs and storytelling visuals.</p>
+          <p class="muted">Interactive dashboards for decision-makers with drilldowns & KPIs.</p>
         </div>
         <div class="card">
           <h4>Excel-Based Reporting</h4>
-          <p class="muted">Automated Excel dashboards using pivots, formulas and SQL connections.</p>
+          <p class="muted">Reports using pivots, formulas, automation & SQL connections.</p>
         </div>
         <div class="card">
           <h4>Modeling & Forecasting</h4>
-          <p class="muted">Forecasting and predictive analytics for better planning.</p>
+          <p class="muted">Forecasting & predictive analytics for future planning.</p>
         </div>
       </div>
 
-      <div class="tools" aria-hidden="true" style="margin-top:12px">
+      <div class="tools">
         <div class="chip">Python</div>
-        <div class="chip">Pandas</div>
         <div class="chip">Power BI</div>
         <div class="chip">Tableau</div>
-        <div class="chip">MS SQL</div>
+        <div class="chip">SQL</div>
         <div class="chip">Excel</div>
+        <div class="chip">Pandas</div>
         <div class="chip">DAX</div>
       </div>
     </section>
@@ -252,15 +472,15 @@
       <div class="steps">
         <div class="step">
           <strong>1. Understand</strong>
-          <p class="muted">We clarify goals, KPIs, and available data sources.</p>
+          <p class="muted">We clarify goals, KPIs, and data sources.</p>
         </div>
         <div class="step">
           <strong>2. Prepare</strong>
-          <p class="muted">Clean and structure data for reliable analysis.</p>
+          <p class="muted">Clean & structure data for reliable analysis.</p>
         </div>
         <div class="step">
           <strong>3. Deliver</strong>
-          <p class="muted">Dashboards, reports, and models with clear recommendations.</p>
+          <p class="muted">Dashboards, reports & models with actionable insights.</p>
         </div>
       </div>
     </section>
@@ -272,7 +492,7 @@
         <div class="avatar">HJ</div>
         <div>
           <strong>Hitesh Jadhav — Founder</strong>
-          <p class="muted">Certified Data Analyst with engineering background and deep experience in data, dashboards, SQL, and business intelligence.</p>
+          <p class="muted">Certified Data Analyst with engineering background and experience in BI, SQL, dashboards, and analytics.</p>
         </div>
       </div>
     </section>
@@ -284,12 +504,12 @@
       <div class="contact-panel">
         <div>
           <div style="font-weight:800;font-size:16px;">Ready to discuss your data?</div>
-          <p class="muted">Send a message or reach out directly. We respond with steps, timelines, and clarity.</p>
+          <p class="muted">Reach out and we’ll respond with clear next steps & timelines.</p>
         </div>
 
         <div class="contact-cta">
-          <a href="mailto:contact.helixanalytics@gmail.com" class="email">Email: contact.helixanalytics@gmail.com</a>
-          <a href="https://wa.me/917841992721" class="wa">WhatsApp: +91 78419 92721</a>
+          <a class="email" href="mailto:contact.helixanalytics@gmail.com">Email: contact.helixanalytics@gmail.com</a>
+          <a class="wa" href="https://wa.me/917841992721">WhatsApp: +91 78419 92721</a>
         </div>
       </div>
     </section>
@@ -297,9 +517,105 @@
   </main>
 
   <footer>
-    © <span id="year"></span> Helix Analytics — Data • Intelligence • Growth
+    © <span id="year"></span> Helix Analytics — Data • Clarity • Insight
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- CAROUSEL JS -->
+  <script>
+  (function(){
+    const track = document.querySelector('.carousel__track');
+    const slides = Array.from(track.children);
+    const prevBtn = document.querySelector('.carousel__nav--prev');
+    const nextBtn = document.querySelector('.carousel__nav--next');
+    const dotsContainer = document.querySelector('.carousel__dots');
+    const viewport = document.querySelector('.carousel__viewport');
+
+    if(!track) return;
+
+    let currentIndex = 0;
+    const slideCount = slides.length;
+
+    // build dots
+    slides.forEach((s, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'carousel__dot';
+      btn.type = 'button';
+      btn.setAttribute('aria-selected', i===0 ? 'true' : 'false');
+      btn.dataset.index = i;
+      btn.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(btn);
+    });
+    const dots = Array.from(dotsContainer.children);
+
+    function update() {
+      const slideWidth = slides[0].getBoundingClientRect().width + 12;
+      track.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+      dots.forEach((d, i) => d.setAttribute('aria-selected', currentIndex === i ? 'true' : 'false'));
+    }
+
+    function goTo(i){
+      currentIndex = i;
+      update();
+      resetAutoplay();
+    }
+
+    function prev(){
+      currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+      update();
+      resetAutoplay();
+    }
+
+    function next(){
+      currentIndex = (currentIndex + 1) % slideCount;
+      update();
+      resetAutoplay();
+    }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+
+    viewport.addEventListener('keydown', e => {
+      if(e.key === 'ArrowLeft') prev();
+      if(e.key === 'ArrowRight') next();
+    });
+
+    // swipe support
+    let startX = 0, deltaX = 0;
+    viewport.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    viewport.addEventListener('touchmove', e => deltaX = e.touches[0].clientX - startX);
+    viewport.addEventListener('touchend', () => {
+      if(Math.abs(deltaX) > 40){
+        deltaX < 0 ? next() : prev();
+      }
+      deltaX = 0;
+    });
+
+    // autoplay
+    let timer = setInterval(next, 3500);
+    function resetAutoplay(){
+      clearInterval(timer);
+      timer = setInterval(next, 3500);
+    }
+
+    [viewport, prevBtn, nextBtn, track].forEach(el => {
+      el.addEventListener('mouseenter', ()=> clearInterval(timer));
+      el.addEventListener('mouseleave', ()=> resetAutoplay());
+    });
+
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+
+    slides.forEach((sl, idx) => sl.addEventListener('click', () => goTo((idx+1) % slideCount)));
+
+    viewport.setAttribute('tabindex', '0');
+
+    update();
+  })();
+  </script>
+
 </body>
 </html>
