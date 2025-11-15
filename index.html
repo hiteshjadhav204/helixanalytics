@@ -37,21 +37,20 @@
 
     .container{max-width:var(--max-width);margin:0 auto;padding:22px}
 
-    /* HEADER — now fixed */
+    /* HEADER — absolute as requested, transparent, minimal gap */
     header{
-      position:fixed;       /* changed from sticky */
+      position:absolute;  /* absolute header (will not be fixed) */
       top:0;
       left:0;
       right:0;
       z-index:9999;
-      background:rgba(255,255,255,0.92);
-      backdrop-filter:blur(6px);
-      padding:10px 0;       /* slightly larger padding to match bigger logo */
-      box-shadow: 0 6px 18px rgba(2,6,23,0.04);
+      background:transparent; /* transparent so header blends with content */
+      padding:8px 0;          /* compact padding */
+      box-shadow:none;        /* no shadow */
     }
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo-img{height:128px;width:auto;display:block}
+    .logo-img{height:128px;width:auto;display:block} /* user asked to keep A size */
     .brand .title{font-weight:800;font-size:18px}
     .brand .subtitle{font-size:13px;color:var(--muted)}
 
@@ -85,7 +84,6 @@
     .carousel{position:relative;display:flex;flex-direction:column;gap:12px}
     .carousel__viewport{overflow:hidden;width:100%}
     .carousel__track{display:flex;gap:var(--carousel-gap)px;list-style:none;padding:0;margin:0;transition:transform 320ms cubic-bezier(.22,.9,.3,1)}
-    /* each slide will be sized by JS to viewport width */
     .carousel__slide{
       flex:0 0 auto;
       box-sizing:border-box;
@@ -97,7 +95,6 @@
       align-items:center;
       justify-content:center;
     }
-    /* show whole image */
     .carousel__slide img{
       width:100%;
       height:auto;
@@ -424,22 +421,25 @@
   })();
   </script>
 
-  <!-- NEW: set top padding on main so content doesn't hide under fixed header -->
+  <!-- NEW: adjust main padding so content is positioned just under absolute header -->
   <script>
     (function(){
       function adjustMainPaddingForHeader(){
         const header = document.querySelector('header');
         const main = document.querySelector('main');
         if(!header || !main) return;
+        // header height (includes padding)
         const h = Math.ceil(header.getBoundingClientRect().height);
-        main.style.paddingTop = h + 'px';
+        // small gap to keep header visually close to content (6px)
+        const gap = 6;
+        main.style.paddingTop = (h + gap) + 'px';
       }
       window.addEventListener('load', adjustMainPaddingForHeader);
       window.addEventListener('resize', () => {
         clearTimeout(window.__headerPadTimer);
         window.__headerPadTimer = setTimeout(adjustMainPaddingForHeader, 80);
       });
-      // also adjust shortly after DOM changes (in case logo or fonts change size)
+      // in case fonts/images load late
       setTimeout(adjustMainPaddingForHeader, 600);
     })();
   </script>
