@@ -12,23 +12,23 @@
       --card: #ffffff;
       --text: #0f172a;
       --muted: #516076;
-      --accent1: #2643b6; /* tuned to match your logo blue */
+      --accent1: #2643b6;
       --accent2: #1b9ad6;
       --accent-grad: linear-gradient(90deg,var(--accent1),var(--accent2));
       --radius: 12px;
       --shadow: 0 10px 30px rgba(15,23,42,0.08);
-      --max-width: 1100px;
+      --max-width: 1150px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
-    .container{max-width:var(--max-width);margin:0 auto;padding:28px}
+    .container{max-width:var(--max-width);margin:0 auto;padding:22px}
 
     /* header */
-    header{position:sticky;top:12px;z-index:30;background:transparent;padding:6px 0}
+    header{position:sticky;top:10px;z-index:30;background:transparent;padding:8px 0}
     .nav{display:flex;justify-content:space-between;align-items:center;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo-img{height:46px;display:block}
+    .logo-img{height:44px;display:block}
     .brand .title{font-weight:800}
     nav a{margin-left:16px;text-decoration:none;color:var(--muted);font-weight:600}
     .nav-actions{display:flex;gap:10px;align-items:center}
@@ -36,66 +36,94 @@
     .btn-primary{background:var(--accent-grad);color:white;box-shadow:var(--shadow)}
     .btn-outline{border:1px solid rgba(15,23,42,0.06);color:var(--muted);background:transparent}
 
-    /* hero */
-    .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
-    .eyebrow{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(38,67,182,0.08);color:var(--accent1);font-weight:700;font-size:13px}
-    h1{font-size:40px;margin:14px 0 12px;line-height:1.05}
-    p.lead{color:var(--muted);max-width:58ch;font-size:16px}
-    .kpis{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+    /* HERO - optimized, compact */
+    .hero {
+      display:flex;
+      gap:28px;
+      align-items:flex-start;
+      padding:18px 0 28px 0; /* tightened top padding */
+      column-gap:36px;
+    }
+    .hero-left{
+      flex:1;
+      min-width:0;
+    }
+    .hero-right{
+      width:420px;
+      flex-shrink:0;
+    }
+
+    .hero-logo {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:8px;
+    }
+    .hero-logo img { height:84px; width:auto; display:block }
+    .eyebrow{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(38,67,182,0.06);color:var(--accent1);font-weight:700;font-size:13px;margin-bottom:10px;display:inline-block}
+    h1{font-size:36px;margin:8px 0 12px;line-height:1.06}
+    p.lead{color:var(--muted);max-width:62ch;font-size:15px;margin-bottom:16px}
+
+    .kpis{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
     .kpi{background:var(--card);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);min-width:160px}
     .kpi .label{font-size:12px;color:var(--muted);margin-bottom:6px}
-    .kpi .value{font-weight:800;color:var(--text)}
+    .kpi .value{font-weight:700;color:var(--text)}
 
-    .panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
-    .chart{height:220px;border-radius:10px;background:linear-gradient(90deg,#eef2ff,#e0f7fb);display:grid;place-items:center;font-weight:800;color:#243240}
+    .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
+    .chart{height:220px;border-radius:10px;background:linear-gradient(90deg,#eef2ff,#e0f7fb);display:grid;place-items:center;font-weight:700;color:#243240}
 
     /* sections */
-    section{padding:48px 0}
-    h2.section-title{font-size:24px;margin:0 0 12px}
-    p.muted{color:var(--muted);margin:0 0 18px}
+    section{padding:40px 0}
+    h2.section-title{font-size:22px;margin:0 0 10px}
+    p.muted{color:var(--muted);margin:0 0 14px}
 
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);min-height:120px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow);min-height:110px}
     .card h4{margin-bottom:8px}
     .tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
     .chip{background:#eef2ff;padding:8px 12px;border-radius:999px;font-weight:700;color:#243240}
 
-    .steps{display:flex;gap:16px;flex-wrap:wrap}
-    .step{flex:1;background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}
+    .steps{display:flex;gap:12px;flex-wrap:wrap}
+    .step{flex:1;background:var(--card);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
 
-    /* founder */
-    .founder{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-    .founder .avatar{width:96px;height:96px;border-radius:14px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:white;font-weight:800;font-size:28px}
-    .founder p{color:var(--muted);margin-top:8px;max-width:760px}
+    .founder{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .founder .avatar{width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:white;font-weight:800;font-size:24px}
+    .founder p{color:var(--muted);margin-top:6px;max-width:700px}
 
-    /* contact */
-    .contact-panel{background:var(--card);padding:22px;border-radius:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+    .contact-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
     .contact-left{max-width:68%}
-    .contact-left .title{font-weight:800;font-size:18px}
+    .contact-left .title{font-weight:800;font-size:16px}
     .contact-left p{color:var(--muted);margin-top:8px}
-    .contact-cta{display:flex;flex-direction:column;gap:10px}
-    .contact-cta a{display:inline-block;text-decoration:none;padding:10px 14px;border-radius:10px;font-weight:700}
+    .contact-cta{display:flex;flex-direction:column;gap:8px}
+    .contact-cta a{display:inline-block;text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:700}
     .contact-cta .email{background:var(--accent-grad);color:#fff}
     .contact-cta .wa{border:1px solid rgba(15,23,42,0.06);color:var(--muted);background:transparent}
 
-    footer{padding:28px 0;text-align:center;color:var(--muted);font-size:14px}
+    footer{padding:26px 0;text-align:center;color:var(--muted);font-size:14px}
 
     /* responsive */
     @media (max-width:980px){
-      .hero{grid-template-columns:1fr}
+      .hero{flex-direction:column;gap:16px}
+      .hero-right{width:100%}
+      .logo-img{height:40px}
+      .hero-logo img{height:76px}
       .grid-3{grid-template-columns:1fr}
       .nav a{display:none}
       .kpi{min-width:140px}
+      .chart{height:160px}
       .contact-left{max-width:100%}
-      .chart{height:180px}
     }
+
+    /* small helpers */
+    .hidden-mobile{display:inline-block}
+    @media(max-width:480px){.hidden-mobile{display:none}}
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
       <div class="brand">
-        <!-- NAVBAR LOGO: uses logo.png (transparent) -->
+        <!-- small navbar logo -->
         <img src="logo.png" alt="Helix Analytics logo" class="logo-img" />
         <div>
           <div class="title">Helix Analytics</div>
@@ -115,39 +143,45 @@
   </header>
 
   <main class="container">
-    <!-- HERO -->
+    <!-- COMPACT HERO -->
     <section class="hero" aria-labelledby="hero-heading">
-      <div>
-        <!-- LARGE HERO LOGO -->
-        <div style="margin-bottom:12px">
-          <img src="logo.png" alt="Helix Analytics logo" style="height:110px;width:auto;display:block" />
+      <div class="hero-left">
+        <!-- hero logo + header compactly arranged -->
+        <div class="hero-logo" aria-hidden="true">
+          <img src="logo.png" alt="Helix Analytics logo (large)" />
+          <div style="min-width:0">
+            <div style="font-weight:700;font-size:18px">Helix Analytics</div>
+            <div style="font-size:13px;color:var(--muted)">Data • Intelligence • Growth</div>
+          </div>
         </div>
 
-        <div class="eyebrow">Analytics & BI Consultancy</div>
-        <h1 id="hero-heading">Turning raw business data into clear, actionable insights</h1>
-        <p class="lead muted">Helix Analytics helps enterprises structure, analyze, and visualize data — from cleaning and exploration to dashboards and forecasting. We focus on clarity and practical outcomes that support real decisions.</p>
+        <div>
+          <div class="eyebrow">Analytics & BI Consultancy</div>
+          <h1 id="hero-heading">Turning raw business data into clear, actionable insights</h1>
+          <p class="lead muted">Helix Analytics helps enterprises structure, analyze, and visualize data — from cleaning and exploration to dashboards and forecasting. We focus on clarity and practical outcomes that support real decisions.</p>
 
-        <div class="kpis" role="list">
-          <div class="kpi" role="listitem"><div class="label">Approach</div><div class="value">Practical & business-focused</div></div>
-          <div class="kpi" role="listitem"><div class="label">Delivery</div><div class="value">Readable dashboards & reports</div></div>
-          <div class="kpi" role="listitem"><div class="label">Support</div><div class="value">Transparent communication</div></div>
-        </div>
+          <div class="kpis" role="list">
+            <div class="kpi" role="listitem"><div class="label">Approach</div><div class="value">Practical & business-focused</div></div>
+            <div class="kpi" role="listitem"><div class="label">Delivery</div><div class="value">Readable dashboards & reports</div></div>
+            <div class="kpi" role="listitem"><div class="label">Support</div><div class="value">Transparent communication</div></div>
+          </div>
 
-        <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn btn-primary" href="#contact">Get in touch</a>
-          <a class="btn btn-outline" href="#services">See services</a>
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="#contact">Get in touch</a>
+            <a class="btn btn-outline" href="#services">See services</a>
+          </div>
         </div>
       </div>
 
-      <div>
+      <aside class="hero-right">
         <div class="panel" aria-hidden="true">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
             <div style="font-weight:700">Dashboard Preview</div>
             <div style="font-size:13px;color:var(--muted)">Clean • Visual • Insightful</div>
           </div>
           <div class="chart">[Dashboard screenshot placeholder]</div>
         </div>
-      </div>
+      </aside>
     </section>
 
     <!-- SERVICES -->
@@ -172,7 +206,7 @@
         </div>
       </div>
 
-      <div style="height:18px"></div>
+      <div style="height:14px"></div>
 
       <div class="grid-3" role="list">
         <div class="card" role="listitem">
@@ -228,10 +262,10 @@
       <h2 id="founder-title" class="section-title">About the founder</h2>
       <div class="founder">
         <div class="avatar founder-avatar" aria-hidden="true">
-          <div class="avatar-inner" style="width:96px;height:96px;border-radius:14px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:28px">HJ</div>
+          <div class="avatar-inner" style="width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:24px">HJ</div>
         </div>
         <div>
-          <div style="font-weight:800">Hitesh Jadhav — Founder</div>
+          <div style="font-weight:700">Hitesh Jadhav — Founder</div>
           <p class="muted">Certified Data Analyst with an engineering background and experience in market analysis. Hitesh combines statistical rigor, practical business sense and modern tools to deliver insights that help teams make better decisions.</p>
         </div>
       </div>
