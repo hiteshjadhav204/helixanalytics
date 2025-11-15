@@ -21,237 +21,131 @@
       --max-width: 1150px;
     }
 
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      font-family:Inter,system-ui;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
-    }
-
-    .container{max-width:var(--max-width);margin:0 auto;padding:22px;}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+    .container{max-width:var(--max-width);margin:0 auto;padding:22px}
 
     /* HEADER */
     header{
       position:sticky;
-      top:10px;
-      z-index:30;
+      top:8px;
+      z-index:40;
       background:transparent;
       padding:8px 0;
     }
-    .nav{display:flex;justify-content:space-between;align-items:center;}
-    .brand{display:flex;align-items:center;gap:12px;}
-
-    /* ⭐ Navbar logo enlarged */
-    .logo-img{
-      height:56px;
-      width:auto;
-      display:block;
+    .nav{
+      display:flex;
+      align-items:center;       /* ensures vertical alignment */
+      justify-content:space-between;
+      gap:16px;
     }
 
-    .brand .title{font-weight:800;font-size:18px;}
-    nav a{
-      margin-left:18px;
-      text-decoration:none;
-      color:var(--muted);
-      font-weight:600;
-      font-size:15px;
-    }
+    .brand{display:flex;align-items:center;gap:12px}
+    /* BLUE MARK: bigger navbar logo */
+    .logo-img{height:72px;width:auto;display:block}
+    .brand .title{font-weight:800;font-size:18px}
+    .brand .subtitle{font-size:13px;color:var(--muted)}
 
-    .btn{
-      padding:10px 16px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-    }
-    .btn-primary{
-      background:var(--accent-grad);
-      color:white;
-      box-shadow:var(--shadow);
-    }
-    .btn-outline{
-      border:1px solid #d0d7e2;
-      color:var(--muted);
-    }
+    /* NAV RIGHT: keep items on one line and centered */
+    .nav-right{display:flex;align-items:center;gap:22px}
+    nav.main-nav{display:flex;gap:22px;align-items:center}
+    nav.main-nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:15px}
 
-    /* HERO (logo removed + spacing improved) */
+    .btn{padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+    .btn-primary{background:var(--accent-grad);color:white;box-shadow:var(--shadow)}
+    .btn-outline{border:1px solid #d0d7e2;color:var(--muted);background:transparent}
+
+    /* HERO (compact + no CTA buttons) */
     .hero{
       display:flex;
       gap:32px;
       align-items:flex-start;
-      padding:26px 0 30px 0;
+      padding:18px 0 14px 0; /* reduced bottom padding to pull services up */
     }
-    .hero-left{flex:1;}
-    .hero-right{width:420px;flex-shrink:0;}
+    .hero-left{flex:1;min-width:0}
+    .hero-right{width:420px;flex-shrink:0}
 
     .eyebrow{
-      display:inline-block;
-      padding:6px 12px;
-      background:rgba(38,67,182,0.06);
-      color:var(--accent1);
-      font-weight:700;
-      font-size:13px;
-      border-radius:999px;
-      margin-bottom:12px;
+      display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(38,67,182,0.06);color:var(--accent1);font-weight:700;font-size:13px;margin-bottom:12px;
     }
     h1{
-      font-size:38px;
-      line-height:1.1;
-      margin-bottom:12px;
-      font-weight:800;
+      font-size:36px;line-height:1.06;margin:6px 0 12px;font-weight:800;
     }
-    p.lead{
-      color:var(--muted);
-      font-size:15px;
-      max-width:65ch;
-      margin-bottom:18px;
-    }
+    p.lead{color:var(--muted);font-size:15px;max-width:65ch;margin-bottom:14px}
 
-    /* KPI FIXED → stays in one row on desktop */
+    /* KPI GRID (fixed row) */
     .kpis{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:14px;
       width:100%;
       max-width:900px;
+      margin-top:6px;
     }
-    .kpi{
-      background:var(--card);
-      padding:14px;
-      border-radius:12px;
-      box-shadow:var(--shadow);
-    }
-    .kpi .label{font-size:12px;color:var(--muted);margin-bottom:6px;}
-    .kpi .value{font-size:15px;font-weight:700;}
+    .kpi{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}
+    .kpi .label{font-size:12px;color:var(--muted);margin-bottom:6px}
+    .kpi .value{font-size:15px;font-weight:700}
 
-    /* Right panel */
-    .panel{
-      background:var(--card);
-      padding:16px;
-      border-radius:12px;
-      box-shadow:var(--shadow);
-    }
-    .chart{
-      height:220px;
-      border-radius:10px;
-      background:linear-gradient(90deg,#eef2ff,#e0f7fb);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-weight:700;
-      color:#2d3b55;
-    }
+    .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
+    .chart{height:220px;border-radius:10px;background:linear-gradient(90deg,#eef2ff,#e0f7fb);display:flex;align-items:center;justify-content:center;font-weight:700;color:#243240}
 
     /* Sections */
-    section{padding:40px 0;}
-    h2.section-title{font-size:22px;margin-bottom:10px;}
-    p.muted{color:var(--muted);margin-bottom:16px;}
+    section{padding:28px 0} /* reduced to pull Services up under hero */
+    h2.section-title{font-size:22px;margin-bottom:10px}
+    p.muted{color:var(--muted);margin-bottom:12px}
 
-    .grid-3{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-    .card{
-      background:var(--card);
-      padding:16px;
-      border-radius:12px;
-      box-shadow:var(--shadow);
-    }
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}
 
-    .tools{display:flex;gap:10px;flex-wrap:wrap;}
-    .chip{
-      padding:8px 12px;
-      background:#eef2ff;
-      border-radius:999px;
-      font-weight:700;
-      color:#273142;
-    }
+    .tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .chip{padding:8px 12px;background:#eef2ff;border-radius:999px;font-weight:700;color:#243240}
 
-    .steps{display:flex;gap:16px;flex-wrap:wrap;}
-    .step{
-      flex:1;
-      background:var(--card);
-      padding:16px;
-      border-radius:12px;
-      box-shadow:var(--shadow);
-    }
+    .steps{display:flex;gap:12px;flex-wrap:wrap}
+    .step{flex:1;background:var(--card);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
 
-    .founder{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
-
-    .avatar{
-      width:80px;height:80px;
-      border-radius:12px;
-      background:var(--accent-grad);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      color:white;
-      font-size:26px;
-      font-weight:800;
-    }
+    .founder{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .avatar{width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-size:26px;font-weight:800}
 
     /* Contact */
-    .contact-panel{
-      background:var(--card);
-      padding:20px;
-      border-radius:12px;
-      box-shadow:var(--shadow);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:16px;
-    }
-    .contact-cta{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .contact-cta a{
-      text-decoration:none;
-      padding:10px 14px;
-      border-radius:10px;
-      font-weight:700;
-    }
-    .email{background:var(--accent-grad);color:white;}
-    .wa{border:1px solid #d0d7e2;color:var(--muted);}
+    .contact-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .contact-cta{display:flex;flex-direction:column;gap:10px}
+    .contact-cta a{text-decoration:none;padding:10px 14px;border-radius:10px;font-weight:700}
+    .email{background:var(--accent-grad);color:white}
+    .wa{border:1px solid #d0d7e2;color:var(--muted)}
 
-    footer{
-      text-align:center;
-      padding:28px 0;
-      color:var(--muted);
-      font-size:14px;
-    }
+    footer{text-align:center;padding:26px 0;color:var(--muted);font-size:14px}
 
     /* Responsive */
-    @media(max-width:980px){
-      .hero{flex-direction:column;}
-      .hero-right{width:100%;}
-      .grid-3{grid-template-columns:1fr;}
-      .kpis{grid-template-columns:1fr;}
-      .nav a{display:none;}
-      .chart{height:160px;}
+    @media (max-width:980px){
+      .hero{flex-direction:column;gap:18px}
+      .hero-right{width:100%}
+      .grid-3{grid-template-columns:1fr}
+      .kpis{grid-template-columns:1fr}
+      nav.main-nav{display:none}
+      .logo-img{height:64px}
+      .chart{height:160px}
+      section{padding:20px 0}
     }
   </style>
 </head>
-
 <body>
 
   <!-- HEADER -->
   <header>
     <div class="container nav">
       <div class="brand">
-        <img src="logo.png" class="logo-img" alt="Helix Analytics Logo">
+        <!-- BLUE-MARK: bigger navbar logo -->
+        <img src="logo.png" class="logo-img" alt="Helix Analytics logo">
         <div>
           <div class="title">Helix Analytics</div>
-          <div style="font-size:13px;color:var(--muted)">Data • Clarity • Insight</div>
+          <div class="subtitle">Data • Clarity • Insight</div>
         </div>
       </div>
 
+      <!-- RED-MARK: nav items + Email button aligned in one line -->
       <div class="nav-right">
-        <nav>
+        <nav class="main-nav" aria-label="Main navigation">
           <a href="#services">Services</a>
           <a href="#process">Process</a>
           <a href="#contact">Contact</a>
@@ -263,54 +157,46 @@
 
   <!-- HERO -->
   <main class="container">
-    <section class="hero">
+    <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-left">
-
-        <!-- REMOVED HERO LOGO AS REQUESTED -->
-
+        <!-- NO hero logo here (you asked to remove it) -->
         <div class="eyebrow">Analytics & BI Consultancy</div>
 
-        <h1>Turning raw business data into clear, actionable insights</h1>
+        <h1 id="hero-heading">Turning raw business data into clear, actionable insights</h1>
 
-        <p class="lead">
-          Helix Analytics helps enterprises structure, analyze, and visualize data —
-          from cleaning and exploration to dashboards and forecasting.
-        </p>
+        <p class="lead muted">Helix Analytics helps enterprises structure, analyze, and visualize data — from cleaning and exploration to dashboards and forecasting.</p>
 
-        <div class="kpis">
-          <div class="kpi">
+        <!-- KPI grid (3-in-row) -->
+        <div class="kpis" role="list">
+          <div class="kpi" role="listitem">
             <div class="label">Approach</div>
             <div class="value">Practical & business-focused</div>
           </div>
-          <div class="kpi">
+          <div class="kpi" role="listitem">
             <div class="label">Delivery</div>
             <div class="value">Readable dashboards & reports</div>
           </div>
-          <div class="kpi">
+          <div class="kpi" role="listitem">
             <div class="label">Support</div>
             <div class="value">Transparent communication</div>
           </div>
         </div>
 
-        <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn btn-primary" href="#contact">Get in touch</a>
-          <a class="btn btn-outline" href="#services">See services</a>
-        </div>
-
+        <!-- YELLOW MARK: removed the Get in touch / See services CTAs per request -->
       </div>
 
       <div class="hero-right">
         <div class="panel">
-          <div style="display:flex;justify-content:space-between;margin-bottom:12px;font-weight:700;">
-            Dashboard Preview
-            <span style="font-size:13px;color:var(--muted);font-weight:500;">Clean • Visual • Insightful</span>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:700;">
+            <div>Dashboard Preview</div>
+            <div style="font-size:13px;color:var(--muted);font-weight:500;">Clean • Visual • Insightful</div>
           </div>
           <div class="chart">[Dashboard screenshot placeholder]</div>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- SERVICES (moved up by lowered hero spacing) -->
     <section id="services">
       <h2 class="section-title">Services</h2>
       <p class="muted">A complete analytics workflow tailored to your business needs.</p>
@@ -326,20 +212,20 @@
         </div>
         <div class="card">
           <h4>SQL Database Management</h4>
-          <p class="muted">Database querying, optimization, and integration with BI tools.</p>
+          <p class="muted">MS-SQL design, advanced queries, and integrations for reliable reporting.</p>
         </div>
       </div>
 
-      <div style="height:16px;"></div>
+      <div style="height:14px"></div>
 
       <div class="grid-3">
         <div class="card">
           <h4>Dashboard Design (Power BI / Tableau)</h4>
-          <p class="muted">Interactive dashboards built for decision-makers and teams.</p>
+          <p class="muted">Interactive, stakeholder-focused dashboards: clear KPIs and storytelling visuals.</p>
         </div>
         <div class="card">
-          <h4>Excel-based Reporting</h4>
-          <p class="muted">Dynamic reports using pivots, formulas, automation, and SQL connections.</p>
+          <h4>Excel-Based Reporting</h4>
+          <p class="muted">Automated Excel dashboards using pivots, formulas and SQL connections.</p>
         </div>
         <div class="card">
           <h4>Modeling & Forecasting</h4>
@@ -347,12 +233,12 @@
         </div>
       </div>
 
-      <div class="tools">
+      <div class="tools" aria-hidden="true" style="margin-top:12px">
         <div class="chip">Python</div>
         <div class="chip">Pandas</div>
         <div class="chip">Power BI</div>
-        <div class="chip">SQL</div>
         <div class="chip">Tableau</div>
+        <div class="chip">MS SQL</div>
         <div class="chip">Excel</div>
         <div class="chip">DAX</div>
       </div>
@@ -386,10 +272,7 @@
         <div class="avatar">HJ</div>
         <div>
           <strong>Hitesh Jadhav — Founder</strong>
-          <p class="muted">
-            Certified Data Analyst with engineering background and deep experience in data,
-            dashboards, SQL, and business intelligence.
-          </p>
+          <p class="muted">Certified Data Analyst with engineering background and deep experience in data, dashboards, SQL, and business intelligence.</p>
         </div>
       </div>
     </section>
@@ -410,15 +293,13 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <footer>
     © <span id="year"></span> Helix Analytics — Data • Clarity • Insight
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
