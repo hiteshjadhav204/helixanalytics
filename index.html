@@ -150,6 +150,12 @@
 
     footer{text-align:center;padding:26px 0;color:var(--muted);font-size:14px}
 
+    /* Projects grid utility (keeps cards consistent with Services look) */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:12px}
+    .project-card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(15,23,42,0.03)}
+    .project-card h4{margin:0 0 8px 0}
+    .project-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+
     /* Responsive */
     @media (max-width:980px){
       .hero{flex-direction:column;gap:18px}
@@ -259,6 +265,54 @@
         <div class="chip">Excel</div>
         <div class="chip">Pandas</div>
         <div class="chip">DAX</div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (NEW) -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <p class="muted">Selected projects — analyses, dashboards and data solutions delivered for learning and real-world problems.</p>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <h4>✈️ Flight Price EDA (Python)</h4>
+          <p>Exploratory data analysis using Pandas, NumPy and visualizations to identify pricing trends and support pricing strategy recommendations.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>🍷 Wine Quality EDA (Python)</h4>
+          <p>Analysed wine quality dataset to uncover correlations and present findings with clear visualizations.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>📱 Google Play Store EDA (Python)</h4>
+          <p>Analyzed app performance metrics and user trends to highlight drivers of ratings and downloads.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>🛒 Sales Data Analysis (Power BI)</h4>
+          <p>Interactive Power BI dashboard integrating multiple sources to present KPIs and growth opportunities.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>🏥 Insurance Data Analysis (Power BI)</h4>
+          <p>Visualized insurance KPIs and trends for operational and strategic insights.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>💳 UPI Transactions (Power BI & Tableau)</h4>
+          <p>Dashboards to analyze transaction patterns across cities, age groups & payment methods.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>📊 Excel Dashboards</h4>
+          <p>Pivots & dashboards built in Excel to summarize raw data and present action-ready metrics.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>🎓 Student Depression Analysis (SQL + Tableau)</h4>
+          <p>Built visualizations to show relationships between academic pressure, study hours and well-being.</p>
+        </div>
       </div>
     </section>
 
