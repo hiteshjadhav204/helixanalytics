@@ -475,19 +475,52 @@
   })();
   </script>
 
-  <!-- NEW: adjust main padding so content is positioned just under absolute header -->
+  <!-- REPLACED: enhanced header-padding + smooth scroll handler -->
   <script>
     (function(){
-      function adjustMainPaddingForHeader(){
-        const header = document.querySelector('header');
-        const main = document.querySelector('main');
-        if(!header || !main) return;
-        // header height (includes padding)
-        const h = Math.ceil(header.getBoundingClientRect().height);
-        // small gap to keep header visually close to content (6px)
-        const gap = 6;
-        main.style.paddingTop = (h + gap) + 'px';
+      const header = document.querySelector('header');
+      const main = document.querySelector('main');
+
+      function headerOffset() {
+        if (!header) return 0;
+        // header height including padding
+        return Math.ceil(header.getBoundingClientRect().height) + 6; // 6px gap
       }
+
+      function adjustMainPaddingForHeader(){
+        if(!header || !main) return;
+        main.style.paddingTop = headerOffset() + 'px';
+      }
+
+      // Smooth scroll to target accounting for header height
+      function smoothScrollTo(hash, replaceHistory = true){
+        if(!hash) return;
+        const target = document.querySelector(hash);
+        if(!target) return;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+        window.scrollTo({ top, behavior: 'smooth' });
+        // update the URL hash without jumping (optional)
+        if(replaceHistory) history.replaceState(null, '', hash);
+      }
+
+      // Intercept clicks on in-page anchors and scroll smoothly
+      document.addEventListener('click', function(e){
+        const a = e.target.closest('a[href^="#"]');
+        if(!a) return;
+        const href = a.getAttribute('href');
+        if(href === '#' || href === '#0') return; // ignore empty links
+        const url = new URL(href, location.href);
+        if(url.hash && url.pathname === location.pathname){
+          const hash = url.hash;
+          const target = document.querySelector(hash);
+          if(target){
+            e.preventDefault();
+            smoothScrollTo(hash);
+          }
+        }
+      });
+
+      // Re-run padding adjustment on load/resize and ensure it's ready if fonts/images load late
       window.addEventListener('load', adjustMainPaddingForHeader);
       window.addEventListener('resize', () => {
         clearTimeout(window.__headerPadTimer);
@@ -495,6 +528,9 @@
       });
       // in case fonts/images load late
       setTimeout(adjustMainPaddingForHeader, 600);
+
+      // Also expose a small helper if you ever need to scroll programmatically
+      window.helixSmoothScrollTo = smoothScrollTo;
     })();
   </script>
 </body>
