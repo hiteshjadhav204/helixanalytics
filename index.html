@@ -66,7 +66,7 @@
       padding:6px 2px;
       transition: color 180ms ease;
     }
-    /* underline pseudo-element */
+    /* underline pseudo-element (hover only) */
     nav.main-nav a::after{
       content:'';
       position:absolute;
@@ -77,13 +77,15 @@
       background:linear-gradient(90deg,var(--accent1),var(--accent2));
       border-radius:3px;
       transition: width 220ms cubic-bezier(.2,.9,.25,1);
+      pointer-events:none;
     }
     nav.main-nav a:hover::after{ width:100%; }
-    /* active state */
+
+    /* active state: color only (no underline) */
     nav.main-nav a.active{
       color:var(--accent1);
     }
-    nav.main-nav a.active::after{ width:100%; }
+    /* note: intentionally not setting .active::after so underline appears only on hover */
 
     .btn{padding:10px 16px;border-radius:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
     .btn-primary{background:var(--accent-grad);color:white;box-shadow:var(--shadow)}
@@ -187,6 +189,9 @@
     .project-card h4{margin:0 0 8px 0}
     .project-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
 
+    /* mobile nav hidden by default (display only in media query) */
+    .mobile-nav{ display:none; }
+
     /* Responsive */
     @media (max-width:980px){
       .hero{flex-direction:column;gap:18px}
@@ -265,7 +270,7 @@
         </button>
 
         <!-- Mobile nav (hidden by default, shown via JS when toggle active) -->
-        <nav class="mobile-nav" aria-label="Mobile navigation" style="display:block">
+        <nav class="mobile-nav" aria-label="Mobile navigation">
           <a href="#services">Services</a>
           <a href="#projects">Our Work</a>
           <a href="#process">Process</a>
@@ -613,13 +618,14 @@
       const mobileNav = document.querySelector('.mobile-nav');
       let mobileOpen = false;
       function openMobileNav(){
+        if (!mobileNav) return;
         mobileNav.classList.add('open');
         toggle.setAttribute('aria-expanded','true');
         mobileOpen = true;
-        // animate bars into X (optional subtle)
         toggle.classList.add('open');
       }
       function closeMobileNav(){
+        if (!mobileNav) return;
         mobileNav.classList.remove('open');
         toggle.setAttribute('aria-expanded','false');
         mobileOpen = false;
@@ -711,6 +717,10 @@
       }
 
       // Re-run padding adjustment on load/resize and ensure it's ready if fonts/images load late
+      function adjustMainPaddingForHeader(){
+        if(!header || !main) return;
+        main.style.paddingTop = headerOffset() + 'px';
+      }
       window.addEventListener('load', adjustMainPaddingForHeader);
       window.addEventListener('resize', () => {
         clearTimeout(window.__headerPadTimer);
