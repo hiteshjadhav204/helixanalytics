@@ -55,12 +55,43 @@
     .brand .subtitle{font-size:13px;color:var(--muted)}
 
     .nav-right{display:flex;align-items:center;gap:22px}
+    /* main nav (desktop) */
     nav.main-nav{display:flex;gap:22px;align-items:center}
-    nav.main-nav a{color:var(--muted);font-weight:600;font-size:15px}
+    /* nav link style + hover underline animation */
+    nav.main-nav a{
+      color:var(--muted);
+      font-weight:600;
+      font-size:15px;
+      position:relative;
+      padding:6px 2px;
+      transition: color 180ms ease;
+    }
+    /* underline pseudo-element */
+    nav.main-nav a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      height:3px;
+      width:0%;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      border-radius:3px;
+      transition: width 220ms cubic-bezier(.2,.9,.25,1);
+    }
+    nav.main-nav a:hover::after{ width:100%; }
+    /* active state */
+    nav.main-nav a.active{
+      color:var(--accent1);
+    }
+    nav.main-nav a.active::after{ width:100%; }
 
     .btn{padding:10px 16px;border-radius:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
     .btn-primary{background:var(--accent-grad);color:white;box-shadow:var(--shadow)}
     .btn-outline{border:1px solid #d0d7e2;color:var(--muted);background:transparent}
+
+    /* Mobile nav toggle (hidden on desktop) */
+    .nav-toggle{display:none;border:0;background:transparent;padding:8px;border-radius:8px;cursor:pointer}
+    .nav-toggle .bar{display:block;width:22px;height:2px;background:var(--muted);margin:4px 0;border-radius:2px;transition:all 160ms ease}
 
     /* HERO */
     .hero{display:flex;gap:32px;align-items:flex-start;padding:18px 0 14px 0}
@@ -164,7 +195,44 @@
       .grid-3{grid-template-columns:1fr}
       .kpis{grid-template-columns:1fr}
       .process-grid{grid-template-columns:1fr}
+      /* hide desktop nav, show toggle */
       nav.main-nav{display:none}
+      .nav-toggle{display:block}
+
+      /* mobile nav panel (animated) */
+      .mobile-nav{
+        display:block;
+        position:absolute;
+        left:16px;
+        right:16px;
+        top:calc(100% + 6px); /* below header area */
+        background:var(--bg);
+        padding:8px 12px;
+        border-radius:10px;
+        box-shadow:var(--shadow);
+        z-index:9998;
+
+        /* initial (closed) state */
+        max-height:0;
+        opacity:0;
+        transform:translateY(-6px);
+        overflow:hidden;
+        transition: max-height 240ms cubic-bezier(.2,.9,.25,1), opacity 200ms ease, transform 220ms cubic-bezier(.2,.9,.25,1);
+      }
+      /* open state */
+      .mobile-nav.open{
+        max-height:420px; /* big enough for links; will expand smoothly */
+        opacity:1;
+        transform:none;
+      }
+
+      .mobile-nav a{
+        display:block;
+        padding:12px 8px;
+        color:var(--muted);
+        font-weight:700;
+      }
+      .mobile-nav a.active{ color:var(--accent1) }
     }
   </style>
 </head>
@@ -181,11 +249,29 @@
       </div>
 
       <div class="nav-right">
+        <!-- Desktop nav -->
         <nav class="main-nav" aria-label="Main navigation">
           <a href="#services">Services</a>
+          <a href="#projects">Our Work</a>
           <a href="#process">Process</a>
           <a href="#contact">Contact</a>
         </nav>
+
+        <!-- Mobile toggle -->
+        <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <!-- Mobile nav (hidden by default, shown via JS when toggle active) -->
+        <nav class="mobile-nav" aria-label="Mobile navigation" style="display:block">
+          <a href="#services">Services</a>
+          <a href="#projects">Our Work</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
         <a class="btn btn-primary" href="mailto:contact.helixanalytics@gmail.com">Email Us</a>
       </div>
     </div>
@@ -268,10 +354,10 @@
       </div>
     </section>
 
-    <!-- PROJECTS (NEW) -->
+    <!-- OUR WORK (formerly Projects) -->
     <section id="projects">
-      <h2 class="section-title">Projects</h2>
-      <p class="muted">Selected projects — analyses, dashboards and data solutions delivered for learning and real-world problems.</p>
+      <h2 class="section-title">Our Work</h2>
+      <p class="muted">Selected work — analyses, dashboards and data solutions delivered for learning and real-world problems.</p>
 
       <div class="projects-grid">
         <div class="project-card">
@@ -475,7 +561,7 @@
   })();
   </script>
 
-  <!-- REPLACED: enhanced header-padding + smooth scroll handler -->
+  <!-- REPLACED: enhanced header-padding + smooth scroll handler + nav helpers -->
   <script>
     (function(){
       const header = document.querySelector('header');
@@ -515,10 +601,114 @@
           const target = document.querySelector(hash);
           if(target){
             e.preventDefault();
+            // close mobile nav if open
+            closeMobileNav();
             smoothScrollTo(hash);
           }
         }
       });
+
+      // Mobile nav toggle
+      const toggle = document.querySelector('.nav-toggle');
+      const mobileNav = document.querySelector('.mobile-nav');
+      let mobileOpen = false;
+      function openMobileNav(){
+        mobileNav.classList.add('open');
+        toggle.setAttribute('aria-expanded','true');
+        mobileOpen = true;
+        // animate bars into X (optional subtle)
+        toggle.classList.add('open');
+      }
+      function closeMobileNav(){
+        mobileNav.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        mobileOpen = false;
+        toggle.classList.remove('open');
+      }
+      function toggleMobileNav(){
+        if(mobileOpen) closeMobileNav(); else openMobileNav();
+      }
+      if(toggle){
+        toggle.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          toggleMobileNav();
+        });
+        // close when clicking outside
+        document.addEventListener('click', (e)=>{
+          if(!mobileOpen) return;
+          if(e.target.closest('.mobile-nav') || e.target.closest('.nav-toggle')) return;
+          closeMobileNav();
+        });
+      }
+
+      /* Active nav highlighting while scrolling
+         Uses IntersectionObserver to set .active on matching nav links.
+      */
+      const navLinks = Array.from(document.querySelectorAll('nav.main-nav a, nav.mobile-nav a'));
+      const sectionIds = navLinks.map(a => a.getAttribute('href')).filter(h => h && h.startsWith('#')).map(h => h.slice(1));
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+      if('IntersectionObserver' in window && sections.length){
+        const obsOptions = {
+          root: null,
+          rootMargin: `-${headerOffset()}px 0px -40% 0px`, // trigger when section comes near top, accounting for header
+          threshold: 0
+        };
+        let currentActive = null;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting){
+              const id = entry.target.id;
+              setActiveLink('#' + id);
+            }
+          });
+        }, obsOptions);
+        sections.forEach(s => observer.observe(s));
+        // also update on resize in case header height changed
+        window.addEventListener('resize', () => {
+          clearTimeout(window.__navObsTimer);
+          window.__navObsTimer = setTimeout(() => {
+            // rebuild observer with new rootMargin
+            observer.disconnect();
+            const newOpts = {
+              root: null,
+              rootMargin: `-${headerOffset()}px 0px -40% 0px`,
+              threshold: 0
+            };
+            const newObs = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if(entry.isIntersecting){
+                  setActiveLink('#' + entry.target.id);
+                }
+              });
+            }, newOpts);
+            sections.forEach(s => newObs.observe(s));
+            window.__navObserver = newObs;
+          }, 120);
+        });
+      } else {
+        // fallback: on scroll, find nearest section
+        window.addEventListener('scroll', () => {
+          let nearest = null;
+          let nearestDist = Infinity;
+          sections.forEach(s => {
+            const rect = s.getBoundingClientRect();
+            const dist = Math.abs(rect.top - headerOffset());
+            if(dist < nearestDist){
+              nearestDist = dist; nearest = s;
+            }
+          });
+          if(nearest) setActiveLink('#' + nearest.id);
+        });
+      }
+
+      function setActiveLink(hash){
+        navLinks.forEach(a=>{
+          try{
+            if(a.getAttribute('href') === hash) a.classList.add('active'); else a.classList.remove('active');
+          }catch(e){}
+        });
+      }
 
       // Re-run padding adjustment on load/resize and ensure it's ready if fonts/images load late
       window.addEventListener('load', adjustMainPaddingForHeader);
