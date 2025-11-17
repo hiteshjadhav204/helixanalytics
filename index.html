@@ -374,7 +374,7 @@
 
       <div class="projects-grid">
         <div class="project-card">
-          <h4>✈️ Flight Price EDA (Python)</h4>
+          <h4✈️ Flight Price EDA (Python)</h4>
           <p>Exploratory data analysis using Pandas, NumPy and visualizations to identify pricing trends and support pricing strategy recommendations.</p>
         </div>
 
@@ -475,25 +475,24 @@
   <footer>© <span id="year"></span> Helix Analytics — Data • Intelligence • Growth</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
-  <!-- UPDATED CAROUSEL JS (robust sizing + track width set) -->
+  <!-- CAROUSEL JS (unchanged) -->
   <script>
   (function(){
     const viewport = document.querySelector('.carousel__viewport');
     const track = document.querySelector('.carousel__track');
-    if(!viewport || !track) return;
     const slides = Array.from(track.children);
     const prevBtn = document.querySelector('.carousel__nav--prev');
     const nextBtn = document.querySelector('.carousel__nav--next');
     const dotsContainer = document.querySelector('.carousel__dots');
+    if(!track) return;
 
     let currentIndex = 0;
     const slideCount = slides.length;
+    const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--carousel-gap')) || 12;
     let slideWidth = 0;
-    let gap = 0;
     let timer = null;
 
     // build dots
-    dotsContainer.innerHTML = '';
     slides.forEach((s, i) => {
       const btn = document.createElement('button');
       btn.className = 'carousel__dot';
@@ -505,33 +504,20 @@
     });
     const dots = Array.from(dotsContainer.children);
 
-    function pxToNum(v){ return v ? parseFloat(v.replace('px','')) : 0; }
-
+    // size each slide to exactly the viewport width
     function sizeSlides(){
-      // compute viewport available width
-      const vw = Math.max(0, Math.floor(viewport.getBoundingClientRect().width));
-      // read gap from computed style
-      const trackStyle = getComputedStyle(track);
-      gap = pxToNum(trackStyle.columnGap || trackStyle.gap || '0px');
-
-      // set each slide to exact integer width (floor to avoid fractional layout problems)
-      slideWidth = vw;
+      // compute viewport inner width (panel content width)
+      slideWidth = viewport.getBoundingClientRect().width;
       slides.forEach(sl => {
-        sl.style.width = slideWidth + 'px';
+        sl.style.width = `${slideWidth}px`;
       });
-
-      // set explicit track width to avoid browser reflow surprises
-      // total = (slideWidth * count) + (gap * (count - 1))
-      const total = (slideWidth * slideCount) + (gap * Math.max(0, slideCount - 1));
-      track.style.width = total + 'px';
-
-      // refresh transform
+      // ensure track transform aligns
       updateTransform();
     }
 
     function updateTransform(){
       const x = -(currentIndex * (slideWidth + gap));
-      track.style.transform = `translate3d(${x}px,0,0)`;
+      track.style.transform = `translateX(${x}px)`;
       dots.forEach((d,i)=> d.setAttribute('aria-selected', i===currentIndex ? 'true' : 'false'));
     }
 
@@ -543,8 +529,8 @@
     function prev(){ goTo((currentIndex - 1 + slideCount) % slideCount); }
     function next(){ goTo((currentIndex + 1) % slideCount); }
 
-    if(prevBtn) prevBtn.addEventListener('click', prev);
-    if(nextBtn) nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
 
     // keyboard
     viewport.addEventListener('keydown', e => {
@@ -566,7 +552,6 @@
     function resetAutoplay(){ clearInterval(timer); startAutoplay(); }
 
     [viewport, prevBtn, nextBtn, track].forEach(el=>{
-      if(!el) return;
       el.addEventListener('mouseenter', ()=> clearInterval(timer));
       el.addEventListener('mouseleave', ()=> resetAutoplay());
     });
@@ -574,31 +559,13 @@
     // clicking slide goes next
     slides.forEach((sl, idx) => sl.addEventListener('click', () => goTo((idx+1) % slideCount)));
 
-    // initialize after images load (so width stable)
-    function init(){
+    // init on load & resize
+    window.addEventListener('load', () => {
       sizeSlides();
       startAutoplay();
-    }
-
-    const imgs = track.querySelectorAll('img');
-    let imgsToLoad = imgs.length;
-    if(imgsToLoad === 0){
-      // no images — size right away
-      setTimeout(init, 60);
-    } else {
-      imgs.forEach(img => {
-        if(img.complete) {
-          imgsToLoad--;
-        } else {
-          img.addEventListener('load', () => { imgsToLoad--; if(imgsToLoad===0) init(); });
-          img.addEventListener('error', () => { imgsToLoad--; if(imgsToLoad===0) init(); });
-        }
-      });
-      // safety fallback
-      setTimeout(() => { if(imgsToLoad>0) init(); }, 900);
-    }
-
+    });
     window.addEventListener('resize', () => {
+      // small debounce
       clearTimeout(window.__sizeSlidesTimeout);
       window.__sizeSlidesTimeout = setTimeout(() => {
         sizeSlides();
