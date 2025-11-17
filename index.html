@@ -475,24 +475,25 @@
   <footer>© <span id="year"></span> Helix Analytics — Data • Intelligence • Growth</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
-  <!-- CAROUSEL JS (unchanged) -->
+  <!-- REPLACED CAROUSEL JS (fixed sizing & gap handling; prevents "peek" of next slide) -->
   <script>
   (function(){
     const viewport = document.querySelector('.carousel__viewport');
     const track = document.querySelector('.carousel__track');
+    if(!viewport || !track) return;
     const slides = Array.from(track.children);
     const prevBtn = document.querySelector('.carousel__nav--prev');
     const nextBtn = document.querySelector('.carousel__nav--next');
     const dotsContainer = document.querySelector('.carousel__dots');
-    if(!track) return;
 
     let currentIndex = 0;
     const slideCount = slides.length;
-    const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--carousel-gap')) || 12;
     let slideWidth = 0;
+    let gap = 0;
     let timer = null;
 
     // build dots
+    dotsContainer.innerHTML = '';
     slides.forEach((s, i) => {
       const btn = document.createElement('button');
       btn.className = 'carousel__dot';
@@ -504,20 +505,28 @@
     });
     const dots = Array.from(dotsContainer.children);
 
-    // size each slide to exactly the viewport width
+    function pxToNum(v){ return v ? parseFloat(v.replace('px','')) : 0; }
+
     function sizeSlides(){
-      // compute viewport inner width (panel content width)
-      slideWidth = viewport.getBoundingClientRect().width;
-      slides.forEach(sl => {
-        sl.style.width = `${slideWidth}px`;
-      });
-      // ensure track transform aligns
+      const viewportRect = viewport.getBoundingClientRect();
+      const trackStyle = getComputedStyle(track);
+      gap = pxToNum(trackStyle.columnGap || trackStyle.gap || '0px');
+
+      const baseWidth = Math.max(0, viewportRect.width);
+      slides.forEach(sl => { sl.style.width = baseWidth + 'px'; });
+
+      // measure actual rendered width and normalize to avoid sub-pixel jitter
+      const measured = slides[0].getBoundingClientRect().width;
+      slideWidth = Math.round(measured * 2) / 2;
+
+      slides.forEach(sl => { sl.style.width = slideWidth + 'px'; });
+
       updateTransform();
     }
 
     function updateTransform(){
       const x = -(currentIndex * (slideWidth + gap));
-      track.style.transform = `translateX(${x}px)`;
+      track.style.transform = `translate3d(${x}px,0,0)`;
       dots.forEach((d,i)=> d.setAttribute('aria-selected', i===currentIndex ? 'true' : 'false'));
     }
 
@@ -529,8 +538,8 @@
     function prev(){ goTo((currentIndex - 1 + slideCount) % slideCount); }
     function next(){ goTo((currentIndex + 1) % slideCount); }
 
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
+    if(prevBtn) prevBtn.addEventListener('click', prev);
+    if(nextBtn) nextBtn.addEventListener('click', next);
 
     // keyboard
     viewport.addEventListener('keydown', e => {
@@ -552,6 +561,7 @@
     function resetAutoplay(){ clearInterval(timer); startAutoplay(); }
 
     [viewport, prevBtn, nextBtn, track].forEach(el=>{
+      if(!el) return;
       el.addEventListener('mouseenter', ()=> clearInterval(timer));
       el.addEventListener('mouseleave', ()=> resetAutoplay());
     });
@@ -559,13 +569,30 @@
     // clicking slide goes next
     slides.forEach((sl, idx) => sl.addEventListener('click', () => goTo((idx+1) % slideCount)));
 
-    // init on load & resize
-    window.addEventListener('load', () => {
+    // init and handle images loaded
+    function init(){
       sizeSlides();
       startAutoplay();
-    });
+    }
+
+    const imgs = track.querySelectorAll('img');
+    let imgsToLoad = imgs.length;
+    if(imgsToLoad === 0){
+      setTimeout(sizeSlides, 80);
+    } else {
+      imgs.forEach(img => {
+        if(img.complete){
+          imgsToLoad--;
+        } else {
+          img.addEventListener('load', () => { imgsToLoad--; if(imgsToLoad===0) sizeSlides(); });
+          img.addEventListener('error', () => { imgsToLoad--; if(imgsToLoad===0) sizeSlides(); });
+        }
+      });
+      setTimeout(() => { sizeSlides(); }, 800);
+    }
+
+    window.addEventListener('load', init);
     window.addEventListener('resize', () => {
-      // small debounce
       clearTimeout(window.__sizeSlidesTimeout);
       window.__sizeSlidesTimeout = setTimeout(() => {
         sizeSlides();
