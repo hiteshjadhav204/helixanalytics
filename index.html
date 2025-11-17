@@ -475,7 +475,7 @@
   <footer>© <span id="year"></span> Helix Analytics — Data • Intelligence • Growth</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
-  <!-- REPLACED CAROUSEL JS (fixed sizing & gap handling; prevents "peek" of next slide) -->
+  <!-- UPDATED CAROUSEL JS (robust sizing + track width set) -->
   <script>
   (function(){
     const viewport = document.querySelector('.carousel__viewport');
@@ -508,19 +508,24 @@
     function pxToNum(v){ return v ? parseFloat(v.replace('px','')) : 0; }
 
     function sizeSlides(){
-      const viewportRect = viewport.getBoundingClientRect();
+      // compute viewport available width
+      const vw = Math.max(0, Math.floor(viewport.getBoundingClientRect().width));
+      // read gap from computed style
       const trackStyle = getComputedStyle(track);
       gap = pxToNum(trackStyle.columnGap || trackStyle.gap || '0px');
 
-      const baseWidth = Math.max(0, viewportRect.width);
-      slides.forEach(sl => { sl.style.width = baseWidth + 'px'; });
+      // set each slide to exact integer width (floor to avoid fractional layout problems)
+      slideWidth = vw;
+      slides.forEach(sl => {
+        sl.style.width = slideWidth + 'px';
+      });
 
-      // measure actual rendered width and normalize to avoid sub-pixel jitter
-      const measured = slides[0].getBoundingClientRect().width;
-      slideWidth = Math.round(measured * 2) / 2;
+      // set explicit track width to avoid browser reflow surprises
+      // total = (slideWidth * count) + (gap * (count - 1))
+      const total = (slideWidth * slideCount) + (gap * Math.max(0, slideCount - 1));
+      track.style.width = total + 'px';
 
-      slides.forEach(sl => { sl.style.width = slideWidth + 'px'; });
-
+      // refresh transform
       updateTransform();
     }
 
@@ -569,7 +574,7 @@
     // clicking slide goes next
     slides.forEach((sl, idx) => sl.addEventListener('click', () => goTo((idx+1) % slideCount)));
 
-    // init and handle images loaded
+    // initialize after images load (so width stable)
     function init(){
       sizeSlides();
       startAutoplay();
@@ -578,20 +583,21 @@
     const imgs = track.querySelectorAll('img');
     let imgsToLoad = imgs.length;
     if(imgsToLoad === 0){
-      setTimeout(sizeSlides, 80);
+      // no images — size right away
+      setTimeout(init, 60);
     } else {
       imgs.forEach(img => {
-        if(img.complete){
+        if(img.complete) {
           imgsToLoad--;
         } else {
-          img.addEventListener('load', () => { imgsToLoad--; if(imgsToLoad===0) sizeSlides(); });
-          img.addEventListener('error', () => { imgsToLoad--; if(imgsToLoad===0) sizeSlides(); });
+          img.addEventListener('load', () => { imgsToLoad--; if(imgsToLoad===0) init(); });
+          img.addEventListener('error', () => { imgsToLoad--; if(imgsToLoad===0) init(); });
         }
       });
-      setTimeout(() => { sizeSlides(); }, 800);
+      // safety fallback
+      setTimeout(() => { if(imgsToLoad>0) init(); }, 900);
     }
 
-    window.addEventListener('load', init);
     window.addEventListener('resize', () => {
       clearTimeout(window.__sizeSlidesTimeout);
       window.__sizeSlidesTimeout = setTimeout(() => {
