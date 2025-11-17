@@ -27,7 +27,7 @@
       --radius:12px;
       --shadow:0 10px 30px rgba(15,23,42,0.08);
       --max-width:1150px;
-      --carousel-gap:12;
+      --carousel-gap:0; /* set to 0 so no peek of next slide */
     }
 
     *{box-sizing:border-box}
@@ -93,7 +93,6 @@
     nav.main-nav a.active{
       color:var(--accent1);
     }
-    /* note: intentionally not setting .active::after so underline appears only on hover */
 
     .btn{padding:10px 16px;border-radius:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
     .btn-primary{background:var(--accent-grad);color:white;box-shadow:var(--shadow)}
@@ -124,7 +123,13 @@
     /* CAROUSEL - fixed-width slides matched to viewport via JS */
     .carousel{position:relative;display:flex;flex-direction:column;gap:12px}
     .carousel__viewport{overflow:hidden;width:100%}
-    .carousel__track{display:flex;gap:var(--carousel-gap)px;list-style:none;padding:0;margin:0;transition:transform 320ms cubic-bezier(.22,.9,.3,1)}
+    .carousel__track{
+      display:flex;
+      gap:var(--carousel-gap)px;
+      list-style:none;padding:0;margin:0;
+      transition:transform 320ms cubic-bezier(.22,.9,.3,1);
+      will-change:transform;
+    }
     .carousel__slide{
       flex:0 0 auto;
       box-sizing:border-box;
@@ -136,10 +141,12 @@
       align-items:center;
       justify-content:center;
     }
+    /* Make the slide box match the viewport height you want inside the panel.
+       Using max-height ensures images keep their aspect without causing overflow. */
     .carousel__slide img{
       width:100%;
-      height:auto;
-      object-fit:contain;
+      height:100%;
+      object-fit:contain; /* keeps full image visible */
       display:block;
       border-radius:6px;
       background:#f9fbff;
@@ -312,19 +319,19 @@
           </div>
 
           <!-- CAROUSEL -->
-          <div class="carousel">
+          <div class="carousel" aria-roledescription="carousel">
             <button class="carousel__nav carousel__nav--prev" aria-label="Previous slide">‹</button>
 
-            <div class="carousel__viewport" tabindex="0">
-              <ul class="carousel__track">
-                <li class="carousel__slide"><img src="Dash1.png" alt="Dashboard 1"></li>
-                <li class="carousel__slide"><img src="Dash2.png" alt="Dashboard 2"></li>
-                <li class="carousel__slide"><img src="Dash3.png" alt="Dashboard 3"></li>
-                <li class="carousel__slide"><img src="Dash4.png" alt="Dashboard 4"></li>
-                <li class="carousel__slide"><img src="Dash5.png" alt="Dashboard 5"></li>
-                <li class="carousel__slide"><img src="Dash6.png" alt="Dashboard 6"></li>
-                <li class="carousel__slide"><img src="Dash7.png" alt="Dashboard 7"></li>
-                <li class="carousel__slide"><img src="Dash8.png" alt="Dashboard 8"></li>
+            <div class="carousel__viewport" tabindex="0" aria-label="Dashboard screenshots viewport">
+              <ul class="carousel__track" role="list">
+                <li class="carousel__slide" role="listitem"><img src="Dash1.png" alt="Dashboard 1"></li>
+                <li class="carousel__slide" role="listitem"><img src="Dash2.png" alt="Dashboard 2"></li>
+                <li class="carousel__slide" role="listitem"><img src="Dash3.png" alt="Dashboard 3"></li>
+                <li class="carousel__slide" role="listitem"><img src="Dash4.png" alt="Dashboard 4"></li>
+                <li class="carousel__slide" role="listitem"><img src="Dash5.png" alt="Dashboard 5"></li>
+                <li class="carousel__slide" role="listitem"><img src="Dash6.png" alt="Dashboard 6"></li>
+                <li class="carousel__slide" role="listitem"><img src="Dash7.png" alt="Dashboard 7"></li>
+                <li class="carousel__slide" role="listitem"><img src="Dash8.png" alt="Dashboard 8"></li>
               </ul>
             </div>
 
@@ -374,7 +381,7 @@
 
       <div class="projects-grid">
         <div class="project-card">
-          <h4✈️ Flight Price EDA (Python)</h4>
+          <h4>✈️ Flight Price EDA (Python)</h4>
           <p>Exploratory data analysis using Pandas, NumPy and visualizations to identify pricing trends and support pricing strategy recommendations.</p>
         </div>
 
@@ -475,24 +482,29 @@
   <footer>© <span id="year"></span> Helix Analytics — Data • Intelligence • Growth</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
-  <!-- CAROUSEL JS (unchanged) -->
+  <!-- CAROUSEL JS (fixed + guarded) -->
   <script>
   (function(){
     const viewport = document.querySelector('.carousel__viewport');
     const track = document.querySelector('.carousel__track');
-    const slides = Array.from(track.children);
     const prevBtn = document.querySelector('.carousel__nav--prev');
     const nextBtn = document.querySelector('.carousel__nav--next');
     const dotsContainer = document.querySelector('.carousel__dots');
-    if(!track) return;
+
+    // guard: if required elements missing, stop early (prevents errors)
+    if(!viewport || !track || !dotsContainer) return;
+
+    const slides = Array.from(track.children);
+    if(!slides.length) return;
 
     let currentIndex = 0;
     const slideCount = slides.length;
-    const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--carousel-gap')) || 12;
+    const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--carousel-gap')) || 0;
     let slideWidth = 0;
     let timer = null;
 
     // build dots
+    dotsContainer.innerHTML = '';
     slides.forEach((s, i) => {
       const btn = document.createElement('button');
       btn.className = 'carousel__dot';
@@ -504,20 +516,32 @@
     });
     const dots = Array.from(dotsContainer.children);
 
-    // size each slide to exactly the viewport width
+    // size each slide to exactly the viewport width (no peek)
     function sizeSlides(){
       // compute viewport inner width (panel content width)
-      slideWidth = viewport.getBoundingClientRect().width;
+      slideWidth = Math.floor(viewport.getBoundingClientRect().width);
+      // explicitly set each slide width to exactly viewport width
       slides.forEach(sl => {
         sl.style.width = `${slideWidth}px`;
+        // set a fixed height to make images consistent inside the panel (optional)
+        // you can remove the next line if you prefer natural height
+        sl.style.height = Math.max(220, Math.round(slideWidth * 0.5)) + 'px';
       });
-      // ensure track transform aligns
-      updateTransform();
+      // update transform so current slide stays aligned
+      updateTransform(true);
     }
 
-    function updateTransform(){
+    function updateTransform(immediate){
       const x = -(currentIndex * (slideWidth + gap));
-      track.style.transform = `translateX(${x}px)`;
+      if(immediate){
+        track.style.transition = 'none';
+        track.style.transform = `translateX(${x}px)`;
+        // force reflow to flush transition removal then restore
+        void track.offsetWidth;
+        track.style.transition = 'transform 320ms cubic-bezier(.22,.9,.3,1)';
+      } else {
+        track.style.transform = `translateX(${x}px)`;
+      }
       dots.forEach((d,i)=> d.setAttribute('aria-selected', i===currentIndex ? 'true' : 'false'));
     }
 
@@ -529,16 +553,16 @@
     function prev(){ goTo((currentIndex - 1 + slideCount) % slideCount); }
     function next(){ goTo((currentIndex + 1) % slideCount); }
 
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
+    if(prevBtn) prevBtn.addEventListener('click', prev);
+    if(nextBtn) nextBtn.addEventListener('click', next);
 
-    // keyboard
+    // keyboard support
     viewport.addEventListener('keydown', e => {
       if(e.key === 'ArrowLeft') prev();
       if(e.key === 'ArrowRight') next();
     });
 
-    // touch swipe
+    // touch swipe (simple)
     let startX = 0, deltaX = 0;
     viewport.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
     viewport.addEventListener('touchmove', e => { deltaX = e.touches[0].clientX - startX; });
@@ -552,11 +576,12 @@
     function resetAutoplay(){ clearInterval(timer); startAutoplay(); }
 
     [viewport, prevBtn, nextBtn, track].forEach(el=>{
+      if(!el) return;
       el.addEventListener('mouseenter', ()=> clearInterval(timer));
       el.addEventListener('mouseleave', ()=> resetAutoplay());
     });
 
-    // clicking slide goes next
+    // clicking slide goes next (optional)
     slides.forEach((sl, idx) => sl.addEventListener('click', () => goTo((idx+1) % slideCount)));
 
     // init on load & resize
@@ -565,7 +590,6 @@
       startAutoplay();
     });
     window.addEventListener('resize', () => {
-      // small debounce
       clearTimeout(window.__sizeSlidesTimeout);
       window.__sizeSlidesTimeout = setTimeout(() => {
         sizeSlides();
@@ -598,7 +622,6 @@
         if(!target) return;
         const top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
         window.scrollTo({ top, behavior: 'smooth' });
-        // update the URL hash without jumping (optional)
         if(replaceHistory) history.replaceState(null, '', hash);
       }
 
@@ -607,14 +630,13 @@
         const a = e.target.closest('a[href^="#"]');
         if(!a) return;
         const href = a.getAttribute('href');
-        if(href === '#' || href === '#0') return; // ignore empty links
+        if(href === '#' || href === '#0') return;
         const url = new URL(href, location.href);
         if(url.hash && url.pathname === location.pathname){
           const hash = url.hash;
           const target = document.querySelector(hash);
           if(target){
             e.preventDefault();
-            // close mobile nav if open
             closeMobileNav();
             smoothScrollTo(hash);
           }
@@ -655,9 +677,6 @@
         });
       }
 
-      /* Active nav highlighting while scrolling
-         Uses IntersectionObserver to set .active on matching nav links.
-      */
       const navLinks = Array.from(document.querySelectorAll('nav.main-nav a, nav.mobile-nav a'));
       const sectionIds = navLinks.map(a => a.getAttribute('href')).filter(h => h && h.startsWith('#')).map(h => h.slice(1));
       const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
@@ -665,10 +684,9 @@
       if('IntersectionObserver' in window && sections.length){
         const obsOptions = {
           root: null,
-          rootMargin: `-${headerOffset()}px 0px -40% 0px`, // trigger when section comes near top, accounting for header
+          rootMargin: `-${headerOffset()}px 0px -40% 0px`,
           threshold: 0
         };
-        let currentActive = null;
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if(entry.isIntersecting){
@@ -678,11 +696,9 @@
           });
         }, obsOptions);
         sections.forEach(s => observer.observe(s));
-        // also update on resize in case header height changed
         window.addEventListener('resize', () => {
           clearTimeout(window.__navObsTimer);
           window.__navObsTimer = setTimeout(() => {
-            // rebuild observer with new rootMargin
             observer.disconnect();
             const newOpts = {
               root: null,
@@ -701,7 +717,6 @@
           }, 120);
         });
       } else {
-        // fallback: on scroll, find nearest section
         window.addEventListener('scroll', () => {
           let nearest = null;
           let nearestDist = Infinity;
@@ -734,10 +749,9 @@
         clearTimeout(window.__headerPadTimer);
         window.__headerPadTimer = setTimeout(adjustMainPaddingForHeader, 80);
       });
-      // in case fonts/images load late
       setTimeout(adjustMainPaddingForHeader, 600);
 
-      // Also expose a small helper if you ever need to scroll programmatically
+      // expose helper
       window.helixSmoothScrollTo = smoothScrollTo;
     })();
   </script>
