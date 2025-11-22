@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Helix Analytics — Data • Intelligence • Growth</title>
+  <title>Helix Analytics - Data • Intelligence • Growth</title>
   <meta name="description" content="Helix Analytics - Data cleaning, EDA, SQL management, Power BI & Tableau dashboards and forecasting." />
 
   <!-- Favicon set (added) -->
@@ -126,21 +126,19 @@
     .process-card .title{font-weight:700;margin-bottom:8px;font-size:16px}
     .process-card .desc{color:var(--muted);font-size:14px;line-height:1.5}
 
-    /* FOUNDER: new card styling matching contact-panel */
+    /* FOUNDER - card that matches contact-panel */
     .founder-panel{
       background:var(--card);
       padding:18px;
       border-radius:12px;
       box-shadow:var(--shadow);
       display:flex;
-      gap:18px;
       align-items:flex-start;
+      gap:18px;
     }
-    .founder{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;width:100%}
-    .avatar{width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-size:26px;font-weight:800;flex-shrink:0}
-    .founder .meta{max-width:calc(100% - 100px)}
-    .founder .meta strong{display:block;margin-bottom:8px;font-size:16px}
-    .founder .bio{color:var(--muted);line-height:1.55;margin:0}
+    .founder-content{flex:1}
+    .founder-title{font-weight:800;font-size:16px;margin-bottom:10px}
+    .founder-bio{color:var(--muted);line-height:1.55;margin:0}
 
     /* CONTACT */
     .contact-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
@@ -195,7 +193,6 @@
       .mobile-nav a.active{ color:var(--accent1) }
 
       .founder-panel{flex-direction:column;align-items:flex-start}
-      .founder .meta{max-width:100%}
     }
   </style>
 </head>
@@ -258,7 +255,7 @@
         <div class="panel">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:700;">
             <div>Dashboard Preview</div>
-            <div style="font-size:13px;color:var(--muted);font-weight:500;">Swipe • Click • Auto-Slide</div>
+            <div style="font-size:13px;color:var(--muted);font-weight:500;">Swipe - Click - Auto-Slide</div>
           </div>
 
           <!-- CAROUSEL -->
@@ -391,22 +388,19 @@
       </div>
     </section>
 
-    <!-- FOUNDER (now inside a white card like contact) -->
+    <!-- FOUNDER (now inside a white card like contact, avatar removed) -->
     <section>
       <h2 class="section-title">About the founder</h2>
 
       <div class="founder-panel" role="region" aria-labelledby="founder-heading">
-        <div class="founder">
-          <div class="avatar" aria-hidden="true">HJ</div>
-          <div class="meta">
-            <strong id="founder-heading">Hitesh Jadhav — Founder</strong>
-            <p class="bio muted">
-              Mr. Hitesh Jadhav is the Founder of Helix Analytics, a certified Data Analyst with a strong foundation in both technical and analytical disciplines.
-              He holds a Bachelor's Degree in Mechanical Engineering, a stream known for its depth in mathematics and problem solving. This technical background has shaped his structured thinking, logical reasoning, and ability to approach problems methodically, qualities that align with data analytics.
-              After graduation, Mr. Jadhav worked in financial markets for over three years, gaining hands-on experience with technical and fundamental analysis and building an understanding of market behavior and data interpretation. Later, driven by his passion for technology and data, he transitioned into Business and Data Analytics, completing certifications and hands-on projects in Python, SQL, Power BI, Tableau, Excel, and statistical analysis.
-              His approach combines technical expertise with curiosity and discipline, focusing on clarity, accuracy, and meaningful outcomes in every analysis.
-            </p>
-          </div>
+        <div class="founder-content">
+          <div id="founder-heading" class="founder-title">Hitesh Jadhav - Founder</div>
+          <p class="founder-bio">
+            Mr. Hitesh Jadhav is the Founder of Helix Analytics, a certified Data Analyst with a strong foundation in both technical and analytical disciplines.
+            He holds a Bachelor's Degree in Mechanical Engineering, a stream known for its depth in mathematics and problem solving. This technical background has shaped his structured thinking, logical reasoning, and ability to approach problems methodically, qualities that align with data analytics.
+            After graduation, Mr. Jadhav worked in financial markets for over three years, gaining hands-on experience with technical and fundamental analysis and building an understanding of market behavior and data interpretation. Later, driven by his passion for technology and data, he transitioned into Business and Data Analytics, completing certifications and hands-on projects in Python, SQL, Power BI, Tableau, Excel, and statistical analysis.
+            His approach combines technical expertise with curiosity and discipline, focusing on clarity, accuracy, and meaningful outcomes in every analysis.
+          </p>
         </div>
       </div>
     </section>
@@ -430,7 +424,7 @@
 
   </main>
 
-  <footer>© <span id="year"></span> Helix Analytics — Data • Intelligence • Growth</footer>
+  <footer>© <span id="year"></span> Helix Analytics - Data • Intelligence • Growth</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
   <!-- CAROUSEL JS (fixed + guarded) -->
