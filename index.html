@@ -126,10 +126,10 @@
     .process-card .title{font-weight:700;margin-bottom:8px;font-size:16px}
     .process-card .desc{color:var(--muted);font-size:14px;line-height:1.5}
 
-    /* FOUNDER - card that matches contact-panel */
+    /* FOUNDER - improved typography and alignment */
     .founder-panel{
       background:var(--card);
-      padding:18px;
+      padding:22px 26px;
       border-radius:12px;
       box-shadow:var(--shadow);
       display:flex;
@@ -137,8 +137,18 @@
       gap:18px;
     }
     .founder-content{flex:1}
-    .founder-title{font-weight:800;font-size:16px;margin-bottom:10px}
-    .founder-bio{color:var(--muted);line-height:1.55;margin:0}
+    .founder-title{font-weight:800;font-size:16px;margin-bottom:12px;color:var(--text)}
+    .founder-bio{
+      color:var(--muted);
+      line-height:1.8;           /* increased line height for readability */
+      margin:0;
+      font-size:15px;           /* slightly larger body text */
+      text-align:justify;       /* full justification end to end */
+      text-justify:inter-word;
+      hyphens:auto;
+      -webkit-font-smoothing:antialiased;
+      word-break:break-word;    /* avoid overflow on long words */
+    }
 
     /* CONTACT */
     .contact-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
@@ -192,7 +202,8 @@
       .mobile-nav a{ display:block; padding:12px 8px; color:var(--muted); font-weight:700 }
       .mobile-nav a.active{ color:var(--accent1) }
 
-      .founder-panel{flex-direction:column;align-items:flex-start}
+      .founder-panel{flex-direction:column;align-items:flex-start;padding:18px}
+      .founder-bio{line-height:1.7;font-size:15px}
     }
   </style>
 </head>
