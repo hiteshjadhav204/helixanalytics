@@ -45,60 +45,34 @@
 
     .container{max-width:var(--max-width);margin:0 auto;padding:22px}
 
-    /* HEADER — absolute as requested, transparent, minimal gap */
+    /* HEADER - absolute as requested, transparent, minimal gap */
     header{
-      position:absolute;  /* absolute header (will not be fixed) */
+      position:absolute;
       top:0;
       left:0;
       right:0;
       z-index:9999;
-      background:transparent; /* transparent so header blends with content */
-      padding:8px 0;          /* compact padding */
-      box-shadow:none;        /* no shadow */
+      background:transparent;
+      padding:8px 0;
+      box-shadow:none;
     }
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo-img{height:128px;width:auto;display:block} /* user asked to keep A size */
+    .logo-img{height:128px;width:auto;display:block} /* keep logo size A */
     .brand .title{font-weight:800;font-size:18px}
     .brand .subtitle{font-size:13px;color:var(--muted)}
 
     .nav-right{display:flex;align-items:center;gap:22px}
-    /* main nav (desktop) */
     nav.main-nav{display:flex;gap:22px;align-items:center}
-    /* nav link style + hover underline animation */
-    nav.main-nav a{
-      color:var(--muted);
-      font-weight:600;
-      font-size:15px;
-      position:relative;
-      padding:6px 2px;
-      transition: color 180ms ease;
-    }
-    /* underline pseudo-element (hover only) */
-    nav.main-nav a::after{
-      content:'';
-      position:absolute;
-      left:0;
-      bottom:-6px;
-      height:3px;
-      width:0%;
-      background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      border-radius:3px;
-      transition: width 220ms cubic-bezier(.2,.9,.25,1);
-      pointer-events:none;
-    }
-    nav.main-nav a:hover::after{ width:100%; }
-
-    /* active state: color only (no underline) */
-    nav.main-nav a.active{
-      color:var(--accent1);
-    }
+    nav.main-nav a{color:var(--muted);font-weight:600;font-size:15px;position:relative;padding:6px 2px;transition: color 180ms ease}
+    nav.main-nav a::after{content:'';position:absolute;left:0;bottom:-6px;height:3px;width:0%;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:3px;transition: width 220ms cubic-bezier(.2,.9,.25,1)}
+    nav.main-nav a:hover::after{ width:100% }
+    nav.main-nav a.active{ color:var(--accent1) }
 
     .btn{padding:10px 16px;border-radius:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
     .btn-primary{background:var(--accent-grad);color:white;box-shadow:var(--shadow)}
     .btn-outline{border:1px solid #d0d7e2;color:var(--muted);background:transparent}
 
-    /* Mobile nav toggle (hidden on desktop) */
     .nav-toggle{display:none;border:0;background:transparent;padding:8px;border-radius:8px;cursor:pointer}
     .nav-toggle .bar{display:block;width:22px;height:2px;background:var(--muted);margin:4px 0;border-radius:2px;transition:all 160ms ease}
 
@@ -120,47 +94,16 @@
     /* PANEL */
     .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
 
-    /* CAROUSEL - fixed-width slides matched to viewport via JS */
+    /* CAROUSEL */
     .carousel{position:relative;display:flex;flex-direction:column;gap:12px}
     .carousel__viewport{overflow:hidden;width:100%}
-    .carousel__track{
-      display:flex;
-      gap:var(--carousel-gap)px;
-      list-style:none;padding:0;margin:0;
-      transition:transform 320ms cubic-bezier(.22,.9,.3,1);
-      will-change:transform;
-    }
-    .carousel__slide{
-      flex:0 0 auto;
-      box-sizing:border-box;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 8px 24px rgba(15,23,42,0.06);
-      background:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    /* Make the slide box match the viewport height you want inside the panel.
-       Using max-height ensures images keep their aspect without causing overflow. */
-    .carousel__slide img{
-      width:100%;
-      height:100%;
-      object-fit:contain; /* keeps full image visible */
-      display:block;
-      border-radius:6px;
-      background:#f9fbff;
-    }
+    .carousel__track{display:flex;gap:var(--carousel-gap)px;list-style:none;padding:0;margin:0;transition:transform 320ms cubic-bezier(.22,.9,.3,1);will-change:transform}
+    .carousel__slide{flex:0 0 auto;box-sizing:border-box;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,0.06);background:#fff;display:flex;align-items:center;justify-content:center}
+    .carousel__slide img{width:100%;height:100%;object-fit:contain;display:block;border-radius:6px;background:#f9fbff}
 
-    .carousel__nav{
-      background:rgba(255,255,255,0.95);
-      border:1px solid rgba(15,23,42,0.06);
-      width:40px;height:40px;border-radius:8px;display:grid;place-items:center;font-size:20px;cursor:pointer;box-shadow:0 6px 18px rgba(2,6,23,0.06);
-      position:absolute;top:50%;transform:translateY(-50%);z-index:12;
-    }
+    .carousel__nav{background:rgba(255,255,255,0.95);border:1px solid rgba(15,23,42,0.06);width:40px;height:40px;border-radius:8px;display:grid;place-items:center;font-size:20px;cursor:pointer;box-shadow:0 6px 18px rgba(2,6,23,0.06);position:absolute;top:50%;transform:translateY(-50%);z-index:12}
     .carousel__nav--prev{left:8px}
     .carousel__nav--next{right:8px}
-
     .carousel__dots{display:flex;gap:8px;justify-content:center;margin-top:6px}
     .carousel__dot{width:10px;height:10px;border-radius:50%;background:#d9e6ff;cursor:pointer;border:0}
     .carousel__dot[aria-selected="true"]{background:linear-gradient(90deg,#2643b6,#1b9ad6);transform:scale(1.2)}
@@ -183,9 +126,21 @@
     .process-card .title{font-weight:700;margin-bottom:8px;font-size:16px}
     .process-card .desc{color:var(--muted);font-size:14px;line-height:1.5}
 
-    /* FOUNDER */
-    .founder{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-    .avatar{width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-size:26px;font-weight:800}
+    /* FOUNDER: new card styling matching contact-panel */
+    .founder-panel{
+      background:var(--card);
+      padding:18px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+    }
+    .founder{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;width:100%}
+    .avatar{width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-size:26px;font-weight:800;flex-shrink:0}
+    .founder .meta{max-width:calc(100% - 100px)}
+    .founder .meta strong{display:block;margin-bottom:8px;font-size:16px}
+    .founder .bio{color:var(--muted);line-height:1.55;margin:0}
 
     /* CONTACT */
     .contact-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
@@ -198,7 +153,7 @@
 
     footer{text-align:center;padding:26px 0;color:var(--muted);font-size:14px}
 
-    /* Projects grid utility (keeps cards consistent with Services look) */
+    /* Projects grid utility */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:12px}
     .project-card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(15,23,42,0.03)}
     .project-card h4{margin:0 0 8px 0}
@@ -215,44 +170,32 @@
       .grid-3{grid-template-columns:1fr}
       .kpis{grid-template-columns:1fr}
       .process-grid{grid-template-columns:1fr}
-      /* hide desktop nav, show toggle */
       nav.main-nav{display:none}
       .nav-toggle{display:block}
 
-      /* mobile nav panel (animated) */
       .mobile-nav{
         display:block;
         position:absolute;
         left:16px;
         right:16px;
-        top:calc(100% + 6px); /* below header area */
+        top:calc(100% + 6px);
         background:var(--bg);
         padding:8px 12px;
         border-radius:10px;
         box-shadow:var(--shadow);
         z-index:9998;
-
-        /* initial (closed) state */
         max-height:0;
         opacity:0;
         transform:translateY(-6px);
         overflow:hidden;
         transition: max-height 240ms cubic-bezier(.2,.9,.25,1), opacity 200ms ease, transform 220ms cubic-bezier(.2,.9,.25,1);
       }
-      /* open state */
-      .mobile-nav.open{
-        max-height:420px; /* big enough for links; will expand smoothly */
-        opacity:1;
-        transform:none;
-      }
-
-      .mobile-nav a{
-        display:block;
-        padding:12px 8px;
-        color:var(--muted);
-        font-weight:700;
-      }
+      .mobile-nav.open{ max-height:420px; opacity:1; transform:none }
+      .mobile-nav a{ display:block; padding:12px 8px; color:var(--muted); font-weight:700 }
       .mobile-nav a.active{ color:var(--accent1) }
+
+      .founder-panel{flex-direction:column;align-items:flex-start}
+      .founder .meta{max-width:100%}
     }
   </style>
 </head>
@@ -284,7 +227,7 @@
           <span class="bar"></span>
         </button>
 
-        <!-- Mobile nav (hidden by default, shown via JS when toggle active) -->
+        <!-- Mobile nav -->
         <nav class="mobile-nav" aria-label="Mobile navigation">
           <a href="#services">Services</a>
           <a href="#projects">Our Work</a>
@@ -302,7 +245,7 @@
       <div class="hero-left">
         <div class="eyebrow">Analytics & BI Consultancy</div>
         <h1>Turning raw business data into clear, actionable insights</h1>
-        <p class="lead muted">Helix Analytics helps enterprises structure, analyze, and visualize data — from cleaning and exploration to dashboards and forecasting.</p>
+        <p class="lead muted">Helix Analytics helps enterprises structure, analyze, and visualize data - from cleaning and exploration to dashboards and forecasting.</p>
 
         <div class="kpis">
           <div class="kpi"><div class="label">Approach</div><div class="value">Practical & business-focused</div></div>
@@ -374,7 +317,7 @@
       </div>
     </section>
 
-    <!-- OUR WORK (formerly Projects) -->
+    <!-- OUR WORK -->
     <section id="projects">
       <h2 class="section-title">Our Work</h2>
       <p class="muted">Analysis, Dashboards and Data solutions delivered for learning and real-world problems.</p>
@@ -431,7 +374,7 @@
         <div class="process-card" role="listitem">
           <div class="number">1. Understand</div>
           <div class="title">We clarify goals, KPIs and data sources</div>
-          <div class="desc">We begin by understanding what matters most — the decisions you need to take and the data available to support them.</div>
+          <div class="desc">We begin by understanding what matters most - the decisions you need to take and the data available to support them.</div>
         </div>
 
         <div class="process-card" role="listitem">
@@ -448,19 +391,22 @@
       </div>
     </section>
 
-    <!-- FOUNDER -->
+    <!-- FOUNDER (now inside a white card like contact) -->
     <section>
       <h2 class="section-title">About the founder</h2>
-      <div class="founder">
-        <div class="avatar">HJ</div>
-        <div>
-          <strong>Hitesh Jadhav — Founder</strong>
-          <p class="muted">Mr. Hitesh Jadhav is the Founder of Helix Analytics — a certified Data Analyst with a strong foundation in both technical and analytical disciplines.
-He holds a Bachelor’s Degree in Mechanical Engineering, a stream known for its complexity, depth in mathematics, and problem-solving orientation. This technical background has shaped his structured thinking, logical reasoning, and ability to approach problems methodically — qualities that naturally align with the world of data analytics.
-After graduation, Mr. Jadhav pursued the financial markets professionally for over three years. During this time, he gained practical experience in Technical and Fundamental analysis of small, mid, and large-cap companies, and built a solid understanding of market behavior and data interpretation. His experience in analyzing indices and understanding company fundamentals further strengthened his analytical precision and pattern-recognition skills. 
-Later, driven by his passion for technology and data, he transitioned into the field of Business and Data Analytics, completing professional certifications and hands-on projects in Python, SQL, Power BI, Tableau, Excel, and Statistical Analysis. His journey reflects adaptability, continuous learning, and the ability to connect logic with insight.
-Mr. Jadhav believes that data is not just numbers — it’s a story waiting to be understood. His approach combines technical expertise with curiosity and discipline, making him a professional who values clarity, accuracy, and meaningful outcomes in every analysis.
-</p>
+
+      <div class="founder-panel" role="region" aria-labelledby="founder-heading">
+        <div class="founder">
+          <div class="avatar" aria-hidden="true">HJ</div>
+          <div class="meta">
+            <strong id="founder-heading">Hitesh Jadhav — Founder</strong>
+            <p class="bio muted">
+              Mr. Hitesh Jadhav is the Founder of Helix Analytics, a certified Data Analyst with a strong foundation in both technical and analytical disciplines.
+              He holds a Bachelor's Degree in Mechanical Engineering, a stream known for its depth in mathematics and problem solving. This technical background has shaped his structured thinking, logical reasoning, and ability to approach problems methodically, qualities that align with data analytics.
+              After graduation, Mr. Jadhav worked in financial markets for over three years, gaining hands-on experience with technical and fundamental analysis and building an understanding of market behavior and data interpretation. Later, driven by his passion for technology and data, he transitioned into Business and Data Analytics, completing certifications and hands-on projects in Python, SQL, Power BI, Tableau, Excel, and statistical analysis.
+              His approach combines technical expertise with curiosity and discipline, focusing on clarity, accuracy, and meaningful outcomes in every analysis.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -496,9 +442,7 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
     const nextBtn = document.querySelector('.carousel__nav--next');
     const dotsContainer = document.querySelector('.carousel__dots');
 
-    // guard: if required elements missing, stop early (prevents errors)
     if(!viewport || !track || !dotsContainer) return;
-
     const slides = Array.from(track.children);
     if(!slides.length) return;
 
@@ -508,7 +452,6 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
     let slideWidth = 0;
     let timer = null;
 
-    // build dots
     dotsContainer.innerHTML = '';
     slides.forEach((s, i) => {
       const btn = document.createElement('button');
@@ -521,18 +464,12 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
     });
     const dots = Array.from(dotsContainer.children);
 
-    // size each slide to exactly the viewport width (no peek)
     function sizeSlides(){
-      // compute viewport inner width (panel content width)
       slideWidth = Math.floor(viewport.getBoundingClientRect().width);
-      // explicitly set each slide width to exactly viewport width
       slides.forEach(sl => {
         sl.style.width = `${slideWidth}px`;
-        // set a fixed height to make images consistent inside the panel (optional)
-        // you can remove the next line if you prefer natural height
-        sl.style.height = Math.max(220, Math.round(slideWidth * 0.5)) + 'px';
+        sl.style.height = Math.max(220, Math.round(slideWidth * 0.55)) + 'px';
       });
-      // update transform so current slide stays aligned
       updateTransform(true);
     }
 
@@ -541,7 +478,6 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
       if(immediate){
         track.style.transition = 'none';
         track.style.transform = `translateX(${x}px)`;
-        // force reflow to flush transition removal then restore
         void track.offsetWidth;
         track.style.transition = 'transform 320ms cubic-bezier(.22,.9,.3,1)';
       } else {
@@ -561,13 +497,11 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
     if(prevBtn) prevBtn.addEventListener('click', prev);
     if(nextBtn) nextBtn.addEventListener('click', next);
 
-    // keyboard support
     viewport.addEventListener('keydown', e => {
       if(e.key === 'ArrowLeft') prev();
       if(e.key === 'ArrowRight') next();
     });
 
-    // touch swipe (simple)
     let startX = 0, deltaX = 0;
     viewport.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
     viewport.addEventListener('touchmove', e => { deltaX = e.touches[0].clientX - startX; });
@@ -576,7 +510,6 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
       deltaX = 0;
     });
 
-    // autoplay
     function startAutoplay(){ timer = setInterval(next, 3500); }
     function resetAutoplay(){ clearInterval(timer); startAutoplay(); }
 
@@ -586,10 +519,8 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
       el.addEventListener('mouseleave', ()=> resetAutoplay());
     });
 
-    // clicking slide goes next (optional)
     slides.forEach((sl, idx) => sl.addEventListener('click', () => goTo((idx+1) % slideCount)));
 
-    // init on load & resize
     window.addEventListener('load', () => {
       sizeSlides();
       startAutoplay();
@@ -603,7 +534,7 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
   })();
   </script>
 
-  <!-- REPLACED: enhanced header-padding + smooth scroll handler + nav helpers -->
+  <!-- header padding + smooth scroll + nav helpers -->
   <script>
     (function(){
       const header = document.querySelector('header');
@@ -611,8 +542,7 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
 
       function headerOffset() {
         if (!header) return 0;
-        // header height including padding
-        return Math.ceil(header.getBoundingClientRect().height) + 6; // 6px gap
+        return Math.ceil(header.getBoundingClientRect().height) + 6;
       }
 
       function adjustMainPaddingForHeader(){
@@ -620,7 +550,6 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
         main.style.paddingTop = headerOffset() + 'px';
       }
 
-      // Smooth scroll to target accounting for header height
       function smoothScrollTo(hash, replaceHistory = true){
         if(!hash) return;
         const target = document.querySelector(hash);
@@ -630,7 +559,6 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
         if(replaceHistory) history.replaceState(null, '', hash);
       }
 
-      // Intercept clicks on in-page anchors and scroll smoothly
       document.addEventListener('click', function(e){
         const a = e.target.closest('a[href^="#"]');
         if(!a) return;
@@ -648,7 +576,6 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
         }
       });
 
-      // Mobile nav toggle
       const toggle = document.querySelector('.nav-toggle');
       const mobileNav = document.querySelector('.mobile-nav');
       let mobileOpen = false;
@@ -674,7 +601,6 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
           e.stopPropagation();
           toggleMobileNav();
         });
-        // close when clicking outside
         document.addEventListener('click', (e)=>{
           if(!mobileOpen) return;
           if(e.target.closest('.mobile-nav') || e.target.closest('.nav-toggle')) return;
@@ -687,16 +613,11 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
       const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
       if('IntersectionObserver' in window && sections.length){
-        const obsOptions = {
-          root: null,
-          rootMargin: `-${headerOffset()}px 0px -40% 0px`,
-          threshold: 0
-        };
+        const obsOptions = { root: null, rootMargin: `-${headerOffset()}px 0px -40% 0px`, threshold: 0 };
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if(entry.isIntersecting){
-              const id = entry.target.id;
-              setActiveLink('#' + id);
+              setActiveLink('#' + entry.target.id);
             }
           });
         }, obsOptions);
@@ -705,11 +626,7 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
           clearTimeout(window.__navObsTimer);
           window.__navObsTimer = setTimeout(() => {
             observer.disconnect();
-            const newOpts = {
-              root: null,
-              rootMargin: `-${headerOffset()}px 0px -40% 0px`,
-              threshold: 0
-            };
+            const newOpts = { root: null, rootMargin: `-${headerOffset()}px 0px -40% 0px`, threshold: 0 };
             const newObs = new IntersectionObserver((entries) => {
               entries.forEach(entry => {
                 if(entry.isIntersecting){
@@ -744,11 +661,6 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
         });
       }
 
-      // Re-run padding adjustment on load/resize and ensure it's ready if fonts/images load late
-      function adjustMainPaddingForHeader(){
-        if(!header || !main) return;
-        main.style.paddingTop = headerOffset() + 'px';
-      }
       window.addEventListener('load', adjustMainPaddingForHeader);
       window.addEventListener('resize', () => {
         clearTimeout(window.__headerPadTimer);
@@ -756,7 +668,6 @@ Mr. Jadhav believes that data is not just numbers — it’s a story waiting to 
       });
       setTimeout(adjustMainPaddingForHeader, 600);
 
-      // expose helper
       window.helixSmoothScrollTo = smoothScrollTo;
     })();
   </script>
