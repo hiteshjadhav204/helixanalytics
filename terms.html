@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Terms of Use - Helix Analytics</title>
+  <meta name="description" content="Terms of Use for Helix Analytics" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f8fb;--card:#ffffff;--text:#0f172a;--muted:#516076;--accent1:#2643b6;--accent-grad:linear-gradient(90deg,var(--accent1),#1b9ad6);--shadow:0 10px 30px rgba(15,23,42,0.08);--max-width:1150px
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    .container{max-width:var(--max-width);margin:0 auto;padding:22px}
+    header{padding:8px 0}
+    .logo-img{height:56px}
+    nav.main-nav{display:flex;gap:18px;align-items:center}
+    .btn-primary{background:var(--accent-grad);color:#fff;padding:8px 12px;border-radius:10px;font-weight:700}
+    .card{background:var(--card);padding:26px;border-radius:12px;box-shadow:var(--shadow)}
+    h1{font-size:24px;margin-bottom:8px}
+    h2{font-size:18px;margin-top:18px}
+    p, ul{color:var(--muted);margin-bottom:12px}
+    footer{padding:26px 0;color:var(--muted)}
+    .footer-wrap{display:flex;justify-content:space-between;align-items:center;max-width:var(--max-width);margin:0 auto;padding:20px 22px}
+    .footer-links{display:flex;gap:28px}
+    .footer-links a{color:var(--accent1);font-weight:700;text-decoration:underline}
+    @media (max-width:640px){.footer-wrap{flex-direction:column;gap:10px;text-align:center} nav.main-nav{display:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;gap:12px;align-items:center">
+        <img src="logo.png" class="logo-img" alt="logo">
+        <div>
+          <div style="font-weight:800">Helix Analytics</div>
+          <div style="color:var(--muted);font-size:13px">Data • Intelligence • Growth</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:center">
+        <nav class="main-nav" aria-label="Main nav">
+          <a href="index.html">Home</a>
+          <a href="index.html#services">Services</a>
+        </nav>
+        <a class="btn-primary" href="mailto:contact.helixanalytics@gmail.com">Email Us</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h1>Terms of Use</h1>
+      <p>These Terms of Use govern your access to and use of the Helix Analytics website and services. By using this site you accept these terms.</p>
+
+      <h2>Use of content</h2>
+      <p>All content on this site is provided for general information only. You may view and download pages for your personal, non commercial use subject to the restrictions below.</p>
+      <ul>
+        <li>Do not reproduce, distribute, or create derivative works without express permission.</li>
+        <li>Respect copyrights and trademarks shown on the site.</li>
+      </ul>
+
+      <h2>User responsibilities</h2>
+      <p>When you contact us you must provide accurate information. You agree not to misuse the website or attempt to access restricted areas.</p>
+
+      <h2>No professional advice</h2>
+      <p>Content on this site does not constitute professional advice. For tailored recommendations please engage with us and share project details so we can provide a proposal.</p>
+
+      <h2>Limitation of liability</h2>
+      <p>To the extent permitted by law, Helix Analytics is not liable for any loss arising from use of the site or reliance on its content. We provide services in good faith but results depend on data, scope, and other factors.</p>
+
+      <h2>Changes and termination</h2>
+      <p>We may update these terms and the site at any time. If we terminate access we will do so without prior notice where necessary.</p>
+
+      <h2>Governing law</h2>
+      <p>These terms are governed by applicable law in India. If a provision is invalid it will not affect other provisions.</p>
+
+      <p style="margin-top:18px;color:var(--muted)">If you have questions about these terms contact us at contact.helixanalytics@gmail.com</p>
+    </div>
+  </main>
+
+  <footer aria-label="Site footer">
+    <div class="footer-wrap">
+      <div>© <span id="yearTerms"></span> Helix Analytics - Data • Intelligence • Growth</div>
+      <nav class="footer-links" aria-label="Footer policies">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>document.getElementById('yearTerms').textContent = new Date().getFullYear();</script>
+</body>
+</html>
