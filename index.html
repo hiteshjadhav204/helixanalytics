@@ -1,3 +1,5 @@
+<!-- Updated index.html with footer links to policy pages -->
+<!-- File: index.html -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -159,7 +161,10 @@
     .contact-cta .email{background:var(--accent-grad);color:#fff}
     .contact-cta .wa{border:1px solid #d0d7e2;color:var(--muted);background:transparent}
 
-    footer{text-align:center;padding:26px 0;color:var(--muted);font-size:14px}
+    footer{padding:26px 0;color:var(--muted);font-size:14px}
+    footer .footer-links{margin-bottom:8px}
+    footer .footer-links a{color:var(--muted);font-weight:700;margin:0 8px;padding:6px 8px;border-radius:8px}
+    footer .footer-links a:hover{color:var(--accent1)}
 
     /* Projects grid utility */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:12px}
@@ -249,6 +254,8 @@
   </header>
 
   <main class="container">
+    <!-- existing content unchanged -->
+
     <section class="hero">
       <div class="hero-left">
         <div class="eyebrow">Analytics & BI Consultancy</div>
@@ -435,7 +442,18 @@
 
   </main>
 
-  <footer>© <span id="year"></span> Helix Analytics - Data • Intelligence • Growth</footer>
+  <!-- Footer with policy links added -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+      <div>© <span id="year"></span> Helix Analytics - Data • Intelligence • Growth</div>
+    </div>
+  </footer>
+
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
   <!-- CAROUSEL JS (fixed + guarded) -->
@@ -676,5 +694,119 @@
       window.helixSmoothScrollTo = smoothScrollTo;
     })();
   </script>
+</body>
+</html>
+
+
+
+<!-- File: privacy.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Privacy Policy | Helix Analytics</title>
+  <meta name="robots" content="noindex">
+  <style>body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#0f172a;background:#f6f8fb;padding:28px} .container{max-width:900px;margin:0 auto;background:#fff;padding:22px;border-radius:10px;box-shadow:0 8px 24px rgba(15,23,42,0.06)} h1{margin-top:0} a{color:#2643b6}</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Privacy Policy</h1>
+    <p><strong>Helix Analytics - Data. Intelligence. Growth</strong></p>
+    <p>Last updated: [add date]</p>
+
+    <h2>Information We Collect</h2>
+    <p>We do not collect personal information through our website. We do not use contact forms, analytics tools or cookies for tracking.</p>
+
+    <h2>Use of Information</h2>
+    <p>Because we do not collect personal information, we do not use, store or share personal data.</p>
+
+    <h2>Third Party Links</h2>
+    <p>Our website may contain links to external websites. We are not responsible for the privacy practices of those sites.</p>
+
+    <h2>Children</h2>
+    <p>Our website is not intended for children under 13.</p>
+
+    <h2>Contact</h2>
+    <p>For privacy questions please email contact.helixanalytics@gmail.com</p>
+
+    <p><a href="index.html">Back to home</a></p>
+  </div>
+</body>
+</html>
+
+
+
+<!-- File: terms.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Terms of Use | Helix Analytics</title>
+  <meta name="robots" content="noindex">
+  <style>body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#0f172a;background:#f6f8fb;padding:28px} .container{max-width:900px;margin:0 auto;background:#fff;padding:22px;border-radius:10px;box-shadow:0 8px 24px rgba(15,23,42,0.06)} h1{margin-top:0} a{color:#2643b6}</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Terms of Use</h1>
+    <p><strong>Helix Analytics - Data. Intelligence. Growth</strong></p>
+    <p>Last updated: [add date]</p>
+
+    <h2>Acceptance of Terms</h2>
+    <p>By accessing our website you accept these terms.</p>
+
+    <h2>Use of Website</h2>
+    <p>You may view and use the website for personal and non commercial purposes only. You agree not to misuse the website or attempt to disrupt its functionality.</p>
+
+    <h2>Intellectual Property</h2>
+    <p>All content on the website belongs to Helix Analytics. You may not copy or reproduce content without written permission.</p>
+
+    <h2>No Client Relationship</h2>
+    <p>Viewing the website does not create any professional or client relationship.</p>
+
+    <h2>Limitation of Liability</h2>
+    <p>Helix Analytics is not responsible for any loss or damage that may arise from using the website.</p>
+
+    <h2>Contact</h2>
+    <p>For questions email contact.helixanalytics@gmail.com</p>
+
+    <p><a href="index.html">Back to home</a></p>
+  </div>
+</body>
+</html>
+
+
+
+<!-- File: disclaimer.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Disclaimer | Helix Analytics</title>
+  <meta name="robots" content="noindex">
+  <style>body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#0f172a;background:#f6f8fb;padding:28px} .container{max-width:900px;margin:0 auto;background:#fff;padding:22px;border-radius:10px;box-shadow:0 8px 24px rgba(15,23,42,0.06)} h1{margin-top:0} a{color:#2643b6}</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Disclaimer</h1>
+    <p><strong>Helix Analytics - Data. Intelligence. Growth</strong></p>
+    <p>Last updated: [add date]</p>
+
+    <h2>General Information</h2>
+    <p>The content on this website is for general information only and should not be considered professional advice.</p>
+
+    <h2>No Guarantees</h2>
+    <p>We make no guarantees regarding accuracy, completeness or outcomes based on the content on this site.</p>
+
+    <h2>Not Professional Advice</h2>
+    <p>Any insights or examples displayed are not intended as financial, technical, business or legal advice.</p>
+
+    <h2>Contact</h2>
+    <p>For questions email contact.helixanalytics@gmail.com</p>
+
+    <p><a href="index.html">Back to home</a></p>
+  </div>
 </body>
 </html>
