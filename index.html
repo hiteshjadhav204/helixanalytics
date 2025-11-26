@@ -159,7 +159,17 @@
     .contact-cta .email{background:var(--accent-grad);color:#fff}
     .contact-cta .wa{border:1px solid #d0d7e2;color:var(--muted);background:transparent}
 
-    footer{text-align:center;padding:26px 0;color:var(--muted);font-size:14px}
+    /* Footer updated: left copyright, right policy links */
+    .footer-wrap{max-width:var(--max-width);margin:0 auto;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .footer-copyright{color:var(--muted);font-size:14px;font-weight:600}
+    .footer-links{display:flex;gap:28px;align-items:center;white-space:nowrap}
+    .footer-links a{color:var(--accent1);font-weight:700;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px;padding:4px 2px;font-size:15px}
+
+    /* Small screens: stack vertically but keep links centered */
+    @media (max-width:640px){
+      .footer-wrap{flex-direction:column;align-items:center;gap:10px;text-align:center}
+      .footer-links{flex-wrap:wrap;gap:14px}
+    }
 
     /* Projects grid utility */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:12px}
@@ -435,7 +445,19 @@
 
   </main>
 
-  <footer>© <span id="year"></span> Helix Analytics - Data • Intelligence • Growth</footer>
+  <footer aria-label="Site footer">
+    <div class="footer-wrap">
+      <div class="footer-copyright">
+        © <span id="year"></span> Helix Analytics - Data • Intelligence • Growth
+      </div>
+
+      <nav class="footer-links" aria-label="Footer policies">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </nav>
+    </div>
+  </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
   <!-- CAROUSEL JS (fixed + guarded) -->
