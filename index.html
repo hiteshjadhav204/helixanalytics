@@ -6,7 +6,7 @@
   <title>Helix Analytics - Data • Intelligence • Growth</title>
   <meta name="description" content="Helix Analytics - Data cleaning, EDA, SQL management, Power BI & Tableau dashboards and forecasting." />
 
-  <!-- Favicon -->
+  <!-- Favicon set (added) -->
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -27,7 +27,7 @@
       --radius:12px;
       --shadow:0 10px 30px rgba(15,23,42,0.08);
       --max-width:1150px;
-      --carousel-gap:0;
+      --carousel-gap:0; /* set to 0 so no peek of next slide */
     }
 
     *{box-sizing:border-box}
@@ -45,6 +45,7 @@
 
     .container{max-width:var(--max-width);margin:0 auto;padding:22px}
 
+    /* HEADER - absolute as requested, transparent, minimal gap */
     header{
       position:absolute;
       top:0;
@@ -57,7 +58,7 @@
     }
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo-img{height:128px;width:auto;display:block}
+    .logo-img{height:128px;width:auto;display:block} /* keep logo size A */
     .brand .title{font-weight:800;font-size:18px}
     .brand .subtitle{font-size:13px;color:var(--muted)}
 
@@ -90,8 +91,10 @@
     .kpi .label{font-size:12px;color:var(--muted);margin-bottom:6px}
     .kpi .value{font-size:15px;font-weight:700}
 
+    /* PANEL */
     .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
 
+    /* CAROUSEL */
     .carousel{position:relative;display:flex;flex-direction:column;gap:12px}
     .carousel__viewport{overflow:hidden;width:100%}
     .carousel__track{display:flex;gap:var(--carousel-gap)px;list-style:none;padding:0;margin:0;transition:transform 320ms cubic-bezier(.22,.9,.3,1);will-change:transform}
@@ -105,6 +108,7 @@
     .carousel__dot{width:10px;height:10px;border-radius:50%;background:#d9e6ff;cursor:pointer;border:0}
     .carousel__dot[aria-selected="true"]{background:linear-gradient(90deg,#2643b6,#1b9ad6);transform:scale(1.2)}
 
+    /* Sections */
     section{padding:28px 0}
     h2.section-title{font-size:22px;margin-bottom:10px}
     p.muted{color:var(--muted);margin-bottom:12px}
@@ -115,12 +119,14 @@
     .tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
     .chip{padding:8px 12px;background:#eef2ff;border-radius:999px;font-weight:700;color:#243240}
 
+    /* PROCESS */
     .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px;max-width:900px}
     .process-card{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);min-height:120px;display:flex;flex-direction:column;justify-content:flex-start}
     .process-card .number{font-weight:800;color:var(--accent1);margin-bottom:8px;font-size:14px}
     .process-card .title{font-weight:700;margin-bottom:8px;font-size:16px}
     .process-card .desc{color:var(--muted);font-size:14px;line-height:1.5}
 
+    /* FOUNDER - improved typography and alignment */
     .founder-panel{
       background:var(--card);
       padding:22px 26px;
@@ -134,16 +140,17 @@
     .founder-title{font-weight:800;font-size:16px;margin-bottom:12px;color:var(--text)}
     .founder-bio{
       color:var(--muted);
-      line-height:1.8;
+      line-height:1.8;           /* increased line height for readability */
       margin:0;
-      font-size:15px;
-      text-align:justify;
+      font-size:15px;           /* slightly larger body text */
+      text-align:justify;       /* full justification end to end */
       text-justify:inter-word;
       hyphens:auto;
       -webkit-font-smoothing:antialiased;
-      word-break:break-word;
+      word-break:break-word;    /* avoid overflow on long words */
     }
 
+    /* CONTACT */
     .contact-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
     .contact-left .title{font-weight:800;font-size:16px}
     .contact-left p{color:var(--muted);margin-top:6px}
@@ -152,55 +159,18 @@
     .contact-cta .email{background:var(--accent-grad);color:#fff}
     .contact-cta .wa{border:1px solid #d0d7e2;color:var(--muted);background:transparent}
 
-    /* Footer layout tuned to match screenshot */
-    footer{
-      background:transparent;
-      padding:34px 0 48px;
-      color:var(--muted);
-      font-size:14px;
-    }
-    footer .container{display:flex;flex-direction:column;align-items:center;gap:10px;padding:0}
-    footer .footer-links{
-      display:flex;
-      gap:28px;
-      justify-content:center;
-      align-items:center;
-      margin-bottom:6px;
-      flex-wrap:wrap;
-    }
-    footer .footer-links a{
-      display:inline-block;
-      font-weight:700;
-      color:var(--muted);
-      padding:8px 10px;
-      border-radius:8px;
-      transition:color 150ms ease, transform 150ms ease;
-      letter-spacing:0.1px;
-    }
-    footer .footer-links a:hover{
-      color:var(--accent1);
-      transform:translateY(-2px);
-    }
-    footer .copyright{font-weight:500;color:var(--muted);font-size:13px}
+    footer{text-align:center;padding:26px 0;color:var(--muted);font-size:14px}
 
-    /* small decorative lines under footer (matching screenshot) */
-    footer .decor {
-      display:flex;
-      gap:22px;
-      margin-top:8px;
-      align-items:center;
-      justify-content:center;
-      opacity:0.55;
-    }
-    footer .decor span{
-      display:inline-block;
-      width:38px;
-      height:3px;
-      background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      border-radius:3px;
-    }
+    /* Projects grid utility */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:12px}
+    .project-card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(15,23,42,0.03)}
+    .project-card h4{margin:0 0 8px 0}
+    .project-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
 
-    /* Responsive tweaks */
+    /* mobile nav hidden by default (display only in media query) */
+    .mobile-nav{ display:none; }
+
+    /* Responsive */
     @media (max-width:980px){
       .hero{flex-direction:column;gap:18px}
       .hero-right{width:100%}
@@ -232,8 +202,8 @@
       .mobile-nav a{ display:block; padding:12px 8px; color:var(--muted); font-weight:700 }
       .mobile-nav a.active{ color:var(--accent1) }
 
-      footer{padding:26px 0 34px}
-      footer .decor span{width:28px}
+      .founder-panel{flex-direction:column;align-items:flex-start;padding:18px}
+      .founder-bio{line-height:1.7;font-size:15px}
     }
   </style>
 </head>
@@ -250,6 +220,7 @@
       </div>
 
       <div class="nav-right">
+        <!-- Desktop nav -->
         <nav class="main-nav" aria-label="Main navigation">
           <a href="#services">Services</a>
           <a href="#projects">Our Work</a>
@@ -257,12 +228,14 @@
           <a href="#contact">Contact</a>
         </nav>
 
+        <!-- Mobile toggle -->
         <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
         </button>
 
+        <!-- Mobile nav -->
         <nav class="mobile-nav" aria-label="Mobile navigation">
           <a href="#services">Services</a>
           <a href="#projects">Our Work</a>
@@ -296,6 +269,7 @@
             <div style="font-size:13px;color:var(--muted);font-weight:500;">Swipe - Click - Auto-Slide</div>
           </div>
 
+          <!-- CAROUSEL -->
           <div class="carousel" aria-roledescription="carousel">
             <button class="carousel__nav carousel__nav--prev" aria-label="Previous slide">‹</button>
 
@@ -316,10 +290,12 @@
 
             <div class="carousel__dots" role="tablist" aria-label="Slide navigation"></div>
           </div>
+
         </div>
       </div>
     </section>
 
+    <!-- SERVICES -->
     <section id="services">
       <h2 class="section-title">Services</h2>
       <p class="muted">A complete analytics workflow tailored to your business needs.</p>
@@ -349,6 +325,7 @@
       </div>
     </section>
 
+    <!-- OUR WORK -->
     <section id="projects">
       <h2 class="section-title">Our Work</h2>
       <p class="muted">Analysis, Dashboards and Data solutions delivered for learning and real-world problems.</p>
@@ -396,6 +373,7 @@
       </div>
     </section>
 
+    <!-- PROCESS -->
     <section id="process">
       <h2 class="section-title">How we work</h2>
       <p class="muted">A clear, structured approach to solving business problems.</p>
@@ -421,6 +399,7 @@
       </div>
     </section>
 
+    <!-- FOUNDER (now inside a white card like contact, avatar removed) -->
     <section>
       <h2 class="section-title">Meet the founder</h2>
 
@@ -437,6 +416,7 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
       <h2 class="section-title">Contact</h2>
 
@@ -452,27 +432,13 @@
         </div>
       </div>
     </section>
+
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-links" role="navigation" aria-label="Footer policies">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="disclaimer.html">Disclaimer</a>
-      </div>
-
-      <div class="copyright">© <span id="year"></span> Helix Analytics - Data • Intelligence • Growth</div>
-
-      <div class="decor" aria-hidden="true">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </footer>
-
+  <footer>© <span id="year"></span> Helix Analytics - Data • Intelligence • Growth</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
-  <!-- CAROUSEL JS -->
+  <!-- CAROUSEL JS (fixed + guarded) -->
   <script>
   (function(){
     const viewport = document.querySelector('.carousel__viewport');
