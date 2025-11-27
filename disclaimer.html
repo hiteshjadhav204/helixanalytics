@@ -3,71 +3,178 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Disclaimer - Helix Analytics</title>
+  <title>Disclaimer — Helix Analytics</title>
   <meta name="description" content="Disclaimer for Helix Analytics" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="shortcut icon" href="favicon.ico">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    :root{--bg:#f6f8fb;--card:#fff;--text:#0f172a;--muted:#516076;--accent1:#2643b6;--max-width:1150px;--shadow:0 10px 30px rgba(15,23,42,0.08)}
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#516076;
+      --accent1:#2643b6;
+      --accent2:#1b9ad6;
+      --accent-grad:linear-gradient(90deg,var(--accent1),var(--accent2));
+      --radius:12px;
+      --shadow:0 10px 30px rgba(15,23,42,0.08);
+      --max-width:1150px;
+    }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text)}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+    }
+
+    a{color:inherit;text-decoration:none}
+
     .container{max-width:var(--max-width);margin:0 auto;padding:22px}
-    header{padding:8px 0;display:flex;justify-content:space-between;align-items:center}
-    .logo-img{height:56px}
-    .card{background:var(--card);padding:26px;border-radius:12px;box-shadow:var(--shadow)}
-    h1{font-size:24px}
-    p{color:var(--muted);margin-bottom:12px}
-    footer{padding:26px 0;color:var(--muted)}
-    .footer-wrap{display:flex;justify-content:space-between;align-items:center;max-width:var(--max-width);margin:0 auto;padding:20px 22px}
-    .footer-links{display:flex;gap:28px}
-    .footer-links a{color:var(--accent1);font-weight:700;text-decoration:underline}
-    @media (max-width:640px){.footer-wrap{flex-direction:column;gap:10px;text-align:center} nav.main-nav{display:none}}
+
+    header{
+      position:relative;
+      background:transparent;
+      padding:12px 22px;
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-img{height:128px;width:auto;display:block}
+    .brand .title{font-weight:800;font-size:18px}
+    .brand .subtitle{font-size:13px;color:var(--muted)}
+
+    nav.main-nav{display:flex;gap:22px;align-items:center}
+    nav.main-nav a{color:var(--muted);font-weight:600;font-size:15px;padding:6px 2px}
+    nav.main-nav a.active{ color:var(--accent1) }
+
+    h1.page-title{font-size:22px;margin:18px 0 6px 0}
+    .meta{color:var(--muted);font-size:14px;margin-bottom:18px}
+
+    .card{
+      background:var(--card);
+      padding:22px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(15,23,42,0.03)
+    }
+    .card h2{font-size:18px;margin-top:10px}
+    .card p{color:var(--muted);margin:10px 0;font-size:15px}
+
+    /* Footer */
+    .footer-wrap{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:20px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px
+    }
+    .footer-copyright{
+      color:var(--muted);
+      font-size:14px;
+      font-weight:400
+    }
+    .footer-links{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      white-space:nowrap
+    }
+    .footer-links a{
+      color:var(--muted);
+      font-weight:400;
+      text-decoration:none;
+      padding:4px 2px;
+      font-size:14px;
+      line-height:1
+    }
+    .footer-links a:hover{opacity:0.95;text-decoration:none}
+
+    @media (max-width:640px){
+      .footer-wrap{flex-direction:column;align-items:center;gap:10px;text-align:center}
+      .footer-links{flex-wrap:wrap;gap:14px}
+    }
   </style>
 </head>
-<body>
-  <header class="container">
-    <div style="display:flex;gap:12px;align-items:center">
-      <img src="logo.png" class="logo-img" alt="logo">
-      <div>
-        <div style="font-weight:800">Helix Analytics</div>
-        <div style="color:var(--muted);font-size:13px">Data • Intelligence • Growth</div>
-      </div>
-    </div>
 
-    <div>
-      <a href="index.html#contact" style="background:linear-gradient(90deg,#2643b6,#1b9ad6);color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;text-decoration:none">Contact</a>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img src="logo.png" class="logo-img" alt="Helix Analytics logo">
+        <div>
+          <div class="title">Helix Analytics</div>
+          <div class="subtitle">Data • Intelligence • Growth</div>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#projects">Our Work</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
     </div>
   </header>
 
-  <main class="container">
-    <div class="card">
-      <h1>Disclaimer</h1>
+  <main class="container" role="main">
+    <h1 class="page-title">Disclaimer</h1>
+    <div class="meta">Last updated: 27/11/2025</div>
 
-      <p>The information on this website is provided for general information only. While we try to keep information accurate and up to date, Helix Analytics does not guarantee completeness or suitability for any particular purpose.</p>
+    <div class="card" role="article" aria-labelledby="disc-heading">
+      <h2 id="disc-heading">Helix Analytics - Data. Intelligence. Growth</h2>
+      <p>The content on this website is only for general information. It should not be considered professional advice.</p>
 
-      <h2>No warranty</h2>
-      <p>All content is provided "as is" without warranties of any kind. We disclaim liability for errors, omissions, or outcomes resulting from use of the information on this site.</p>
+      <h2>General Information</h2>
+      <p>The information provided on this website is intended for general informational purposes only.</p>
 
-      <h2>Third party content</h2>
-      <p>We may link to third party sites. Links are provided for convenience and do not imply endorsement. We are not responsible for the content or practices of those sites.</p>
+      <h2>No Guarantees</h2>
+      <p>We make no guarantees regarding accuracy, completeness or outcomes based on the information available on the website.</p>
 
-      <h2>Professional engagements</h2>
-      <p>If you require specific advice or services please contact us. Any engagement should be governed by a written agreement covering scope, deliverables, fees, and confidentiality.</p>
+      <h2>Not Professional Advice</h2>
+      <p>Any insights, ideas or examples displayed on the website are not intended as financial, technical, business or legal advice.</p>
 
-      <p style="margin-top:18px;color:var(--muted)">For questions contact: contact.helixanalytics@gmail.com</p>
+      <h2>External Links</h2>
+      <p>Our website may contain links to external sites. We do not control or take responsibility for the content on those websites.</p>
+
+      <h2>Limitation of Liability</h2>
+      <p>Helix Analytics is not liable for any loss or damages that may arise from using the website.</p>
+
+      <h2>Contact</h2>
+      <p>For questions about this Disclaimer please email
+        <a href="mailto:contact.helixanalytics@gmail.com">contact.helixanalytics@gmail.com</a>
+      </p>
     </div>
   </main>
 
   <footer aria-label="Site footer">
-    <div class="footer-wrap">
-      <div>© <span id="yearDisc"></span> Helix Analytics - Data • Intelligence • Growth</div>
+    <div class="footer-wrap container">
+      <div class="footer-copyright">
+        © <span id="year"></span> Helix Analytics - Data • Intelligence • Growth
+      </div>
+
       <nav class="footer-links" aria-label="Footer policies">
         <a href="privacy.html">Privacy Policy</a>
         <a href="terms.html">Terms of Use</a>
-        <a href="disclaimer.html">Disclaimer</a>
+        <a href="disclaimer.html" aria-current="page">Disclaimer</a>
       </nav>
     </div>
   </footer>
 
-  <script>document.getElementById('yearDisc').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
