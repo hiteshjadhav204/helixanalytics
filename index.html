@@ -161,9 +161,12 @@
 
     /* Footer updated: left copyright, right policy links */
     .footer-wrap{max-width:var(--max-width);margin:0 auto;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .footer-copyright{color:var(--muted);font-size:14px;font-weight:600}
+    /* match the look of the copyright text: same color and size */
+    .footer-copyright{color:var(--muted);font-size:14px;font-weight:400}
     .footer-links{display:flex;gap:28px;align-items:center;white-space:nowrap}
-    .footer-links a{color:var(--accent1);font-weight:700;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px;padding:4px 2px;font-size:15px}
+    /* make links visually identical to the copyright line: same color, size, no underline */
+    .footer-links a{color:var(--muted);font-weight:400;text-decoration:none;padding:4px 2px;font-size:14px;line-height:1}
+    .footer-links a:hover{color:var(--muted);opacity:0.95;text-decoration:none}
 
     /* Small screens: stack vertically but keep links centered */
     @media (max-width:640px){
